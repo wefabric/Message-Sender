@@ -1,0 +1,29 @@
+{
+    "name": "wefabric/message-sender",
+    "description": "Package for sending data packets to an API endpoint",
+    "license": "MIT",
+    "keywords": [
+        "wefabric",
+        "API",
+        "endpoint",
+        "data"
+    ],
+    "autoload": {
+        "psr-4": {
+            "Wefabric\\MessageSender\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Kevin Nauta",
+            "email": "kevin@wefabric.nl"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require-dev": {
+        "symfony/var-dumper": "6.1.x-dev"
+    },
+    "require": {
+        "spatie/data-transfer-object": "dev-main"
+    }
+}
