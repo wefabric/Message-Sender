@@ -1,0 +1,21 @@
+{
+  "name": "wefabric/messageservice31",
+  "description": "",
+  "minimum-stability": "dev",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "kevinnauta",
+      "email": "kevin@wefabric.nl"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Wefabric\\MessageSender\\MessageService31\\": "src/"
+    }
+  },
+  "require": {
+    "ext-soap": "*",
+    "ext-simplexml": "*"
+  }
+}

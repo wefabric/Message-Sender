@@ -21,9 +21,17 @@
     ],
     "minimum-stability": "dev",
     "require-dev": {
-        "symfony/var-dumper": "6.1.x-dev"
+        "symfony/var-dumper": "6.1.x-dev",
+        "wsdltophp/packagegenerator": "dev-master"
     },
     "require": {
-        "spatie/data-transfer-object": "dev-main"
-    }
+        "spatie/data-transfer-object": "dev-main",
+        "wefabric/messageservice31": "*"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "./MessageService31"
+        }
+    ]
 }
