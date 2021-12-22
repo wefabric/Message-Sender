@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Wefabric\MessageSender\MessageService31\EnumType;
+namespace Wefabric\MessageSender\MessageService31_Rexel\EnumType;
 
 use WsdlToPhp\PackageBase\AbstractStructEnumBase;
 

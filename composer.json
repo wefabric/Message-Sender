@@ -26,12 +26,12 @@
     },
     "require": {
         "spatie/data-transfer-object": "dev-main",
-        "wefabric/messageservice31": "*"
+        "wefabric/messageservice31_rexel": "*",
     },
     "repositories": [
         {
             "type": "path",
-            "url": "./MessageService31"
+            "url": "MessageService31_Rexel"
         }
     ]
 }

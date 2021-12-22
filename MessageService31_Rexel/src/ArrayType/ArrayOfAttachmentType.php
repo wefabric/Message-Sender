@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Wefabric\MessageSender\MessageService31\ArrayType;
+namespace Wefabric\MessageSender\MessageService31_Rexel\ArrayType;
 
 use InvalidArgumentException;
-use Wefabric\MessageSender\MessageService31\StructType\AttachmentType;
+use Wefabric\MessageSender\MessageService31_Rexel\StructType\AttachmentType;
 use WsdlToPhp\PackageBase\AbstractStructArrayBase;
 
 /**
@@ -67,7 +67,7 @@ class ArrayOfAttachmentType extends AbstractStructArrayBase
             }
         }
         if (!empty($invalidValues)) {
-            $message = sprintf('The AttachmentType property can only contain items of type \Wefabric\MessageSender\MessageService31\StructType\AttachmentType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+            $message = sprintf('The AttachmentType property can only contain items of type \Wefabric\MessageSender\MessageService31_Rexel\StructType\AttachmentType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
         }
         unset($invalidValues);
         
@@ -153,7 +153,7 @@ class ArrayOfAttachmentType extends AbstractStructArrayBase
     {
         // validation for constraint: itemType
         if (!$item instanceof AttachmentType) {
-            throw new InvalidArgumentException(sprintf('The AttachmentType property can only contain items of type \Wefabric\MessageSender\MessageService31\StructType\AttachmentType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
+            throw new InvalidArgumentException(sprintf('The AttachmentType property can only contain items of type \Wefabric\MessageSender\MessageService31_Rexel\StructType\AttachmentType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         return parent::add($item);
     }

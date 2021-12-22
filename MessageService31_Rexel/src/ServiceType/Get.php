@@ -2,22 +2,22 @@
 
 declare(strict_types=1);
 
-namespace Wefabric\MessageSender\MessageService31\ServiceType;
+namespace Wefabric\MessageSender\MessageService31_Rexel\ServiceType;
 
 use SoapFault;
-use Wefabric\MessageSender\MessageService31\ArrayType\ArrayOfMessageList;
-use Wefabric\MessageSender\MessageService31\StructType\AvailableMessagesRequestType;
-use Wefabric\MessageSender\MessageService31\StructType\CustomInfoType;
-use Wefabric\MessageSender\MessageService31\StructType\MessageRequestResponseType;
-use Wefabric\MessageSender\MessageService31\StructType\MessageRequestType;
-use Wefabric\MessageSender\MessageService31\StructType\Security;
+use Wefabric\MessageSender\MessageService31_Rexel\ArrayType\ArrayOfMessageList;
+use Wefabric\MessageSender\MessageService31_Rexel\StructType\AvailableMessagesRequestType;
+use Wefabric\MessageSender\MessageService31_Rexel\StructType\CustomInfoType;
+use Wefabric\MessageSender\MessageService31_Rexel\StructType\MessageRequestResponseType;
+use Wefabric\MessageSender\MessageService31_Rexel\StructType\MessageRequestType;
+use Wefabric\MessageSender\MessageService31_Rexel\StructType\Security;
 use WsdlToPhp\PackageBase\AbstractSoapClientBase;
 
 /**
  * This class stands for Get ServiceType
  * @subpackage Services
  */
-class Get extends AbstractSoapClientBase
+class Get extends BaseService
 {
     /**
      * Sets the Security SoapHeader param
@@ -50,7 +50,7 @@ class Get extends AbstractSoapClientBase
      * Meta information extracted from the WSDL
      * - SOAPHeaderNames: Security, CustomInfo
      * - SOAPHeaderNamespaces: https://www.ketenstandaard.nl/WS/MessageService/3.1, https://www.ketenstandaard.nl/WS/MessageService/3.1
-     * - SOAPHeaderTypes: \Wefabric\MessageSender\MessageService31\StructType\Security, \Wefabric\MessageSender\MessageService31\StructType\CustomInfoType
+     * - SOAPHeaderTypes: \Wefabric\MessageSender\MessageService31_Rexel-Rexel\StructType\Security, \Wefabric\MessageSender\MessageService31_Rexel-Rexel\StructType\CustomInfoType
      * - SOAPHeaders: required, required
      * @uses AbstractSoapClientBase::getSoapClient()
      * @uses AbstractSoapClientBase::setResult()

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Wefabric\MessageSender\MessageService31\StructType;
+namespace Wefabric\MessageSender\MessageService31_Rexel\StructType;
 
 use InvalidArgumentException;
 use WsdlToPhp\PackageBase\AbstractStructBase;

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Wefabric\MessageSender\MessageService31\StructType;
+namespace Wefabric\MessageSender\MessageService31_Rexel\StructType;
 
 use InvalidArgumentException;
 use WsdlToPhp\PackageBase\AbstractStructBase;
-use Wefabric\MessageSender\MessageService31\ArrayType\ArrayOfAttachmentType;
+use Wefabric\MessageSender\MessageService31_Rexel\ArrayType\ArrayOfAttachmentType;
 
 /**
  * This class stands for MessageType StructType

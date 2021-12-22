@@ -1,5 +1,5 @@
 {
-  "name": "wefabric/messageservice31",
+  "name": "wefabric/messageservice31_rexel",
   "description": "",
   "minimum-stability": "dev",
   "license": "MIT",
@@ -11,7 +11,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "Wefabric\\MessageSender\\MessageService31\\": "src/"
+      "Wefabric\\MessageSender\\MessageService31_Rexel\\": "src/"
     }
   },
   "require": {

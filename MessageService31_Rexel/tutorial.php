@@ -18,7 +18,7 @@ require_once __DIR__ . '/vendor/autoload.php';
  * Minimal options
  */
 $options = [
-    WsdlToPhp\PackageBase\AbstractSoapClientBase::WSDL_URL => 'https://test.messageservice.rexel.nl/MessageService31/MessageService.svc?wsdl',
+    WsdlToPhp\PackageBase\AbstractSoapClientBase::WSDL_URL => 'https://test.messageservice.rexel.nl/MessageService31_Rexel-Rexel/MessageService.svc?wsdl',
     WsdlToPhp\PackageBase\AbstractSoapClientBase::WSDL_CLASSMAP => ClassMap::get(),
 ];
 /**
