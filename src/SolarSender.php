@@ -1,0 +1,86 @@
+<?php
+
+namespace Wefabric\MessageSender;
+
+use DateTime;
+use DateTimeInterface;
+use WsdlToPhp\PackageBase\SoapClientInterface;
+
+use Wefabric\MessageSender\MessageService31_Solar\ServiceType\Post;
+use Wefabric\MessageSender\MessageService31_Solar\StructType\CustomInfoType;
+use Wefabric\MessageSender\MessageService31_Solar\StructType\MessagePropertiesType;
+use Wefabric\MessageSender\MessageService31_Solar\StructType\MessageType;
+
+use Wefabric\MessageSender\MessageService31_Solar\StructType\Security;
+use Wefabric\MessageSender\MessageService31_Solar\StructType\Timestamp;
+use Wefabric\MessageSender\MessageService31_Solar\StructType\UsernameToken;
+
+class SolarSender extends MessageSender
+{
+
+    /**
+     * @return SolarSender Object
+     */
+    public static function make(array $data = []): SolarSender
+    {
+        return new self($data);
+    }
+
+    /**
+     * @return Post A complete Post-object to use and send data to the set URL and credentials.
+     * Use: $response = $post->PostMessage($messageType);
+     */
+    function getPost() : Post
+    {
+        return (new Post($this->getHttpOptions()))
+            ->setSoapHeaderSecurity($this->getSecurity())
+            ->setSoapHeaderCustomInfo($this->getCustomInfo());
+    }
+
+    /**
+     * @return array
+     */
+    function getHttpOptions(): array
+    {
+        return [
+            SoapClientInterface::WSDL_URL => $this->url,
+            SoapClientInterface::WSDL_CLASSMAP => MessageService31_Solar\ClassMap::get(),
+            SoapClientInterface::WSDL_SOAP_VERSION => SOAP_1_1, //OK
+            SoapClientInterface::WSDL_CONNECTION_TIMEOUT => 60,
+            SoapClientInterface::WSDL_CACHE_WSDL => WSDL_CACHE_NONE
+        ];
+    }
+
+    /**
+     * @return CustomInfoType
+     */
+    function getCustomInfo(): CustomInfoType
+    {
+        return new CustomInfoType($this->isTestMessage, $this->languageCode, $this->isContentCompressed, $this->applicationID, $this->versionID, $this->relationID);
+    }
+
+    /**
+     * @param string $msgID
+     * @return MessageType
+     */
+    function getNewMessage(string $msgID): MessageType
+    {
+        return new MessageType(msgContent: '', msgProperties: new MessagePropertiesType((new DateTime())->format(DateTimeInterface::RFC3339), $msgID, $this->msgFormat, $this->msgVersion, $this->msgType));
+    }
+
+
+    /**
+     * @return Security
+     */
+    function getSecurity(bool $includeTimestamp = false): Security
+    {
+        $format = 'Y-m-d\T\0\0\:\0\0\:\0\0\Z'; //try to force time at 00:00Z
+        //$format = DateTimeInterface::RFC3339;
+        return new Security(
+            ($includeTimestamp ? new Timestamp((new DateTime())->format($format), (new DateTime())->modify('+1 day')->format($format)) : null),
+            usernameToken: new UsernameToken($this->inlogCode, $this->password)
+        );
+    }
+
+
+}
