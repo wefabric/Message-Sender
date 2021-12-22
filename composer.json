@@ -32,7 +32,7 @@
     "repositories": [
         {
             "type": "path",
-            "url": "MessageService31_Rexel"
+            "url": "./MessageService31_Rexel"
         },
         {
             "type": "path",
