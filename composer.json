@@ -10,7 +10,9 @@
     ],
     "autoload": {
         "psr-4": {
-            "Wefabric\\MessageSender\\": "src/"
+            "Wefabric\\MessageSender\\": "src/",
+            "Wefabric\\MessageSender\\MessageService31_Rexel\\": "MessageService31_Rexel/src/",
+            "Wefabric\\MessageSender\\MessageService31_Solar\\": "MessageService31_Solar/src/"
         }
     },
     "authors": [
@@ -25,18 +27,6 @@
         "wsdltophp/packagegenerator": "dev-master"
     },
     "require": {
-        "spatie/data-transfer-object": "^2.8",
-        "wefabric/messageservice31_rexel": "*",
-        "wefabric/messageservice31_solar": "*"
-    },
-    "repositories": [
-        {
-            "type": "path",
-            "url": "./MessageService31_Rexel"
-        },
-        {
-            "type": "path",
-            "url": "./MessageService31_Solar"
-        }
-    ]
+        "spatie/data-transfer-object": "^2.8"
+    }
 }
