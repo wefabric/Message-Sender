@@ -25,7 +25,7 @@
         "wsdltophp/packagegenerator": "dev-master"
     },
     "require": {
-        "spatie/data-transfer-object": "dev-main",
+        "spatie/data-transfer-object": "^2.8",
         "wefabric/messageservice31_rexel": "*",
         "wefabric/messageservice31_solar": "*"
     },
