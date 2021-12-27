@@ -64,6 +64,11 @@ if ($post->PostMessage($message) !== false) {
     dump($response);
     dump($orderResponseXML);
 } else {
-    dump($post->getLastError());
+    $responseXML = new SimpleXMLElement('<error/>');
+    foreach($post->getLastError() as $key => $value){
+        $responseXML->addChild($key,$value);
+    }
+    dump($responseXML->asXML());
+
 }
 
