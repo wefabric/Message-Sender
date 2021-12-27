@@ -6,6 +6,7 @@ namespace Wefabric\MessageSender\MessageService31_Solar\ServiceType;
 
 use SoapFault;
 use WsdlToPhp\PackageBase\AbstractSoapClientBase;
+use Wefabric\MessageSender\BaseService\BaseService;
 
 /**
  * This class stands for Get ServiceType

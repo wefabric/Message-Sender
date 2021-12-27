@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Wefabric\MessageSender\MessageService31_Rexel\ServiceType;
 
 use SoapFault;
+use Wefabric\MessageSender\BaseService\BaseService;
 use Wefabric\MessageSender\MessageService31_Rexel\ArrayType\ArrayOfMessageList;
 use Wefabric\MessageSender\MessageService31_Rexel\StructType\AvailableMessagesRequestType;
 use Wefabric\MessageSender\MessageService31_Rexel\StructType\CustomInfoType;

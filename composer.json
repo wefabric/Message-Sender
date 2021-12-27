@@ -23,10 +23,10 @@
     ],
     "minimum-stability": "dev",
     "require-dev": {
-        "symfony/var-dumper": "6.1.x-dev",
-        "wsdltophp/packagegenerator": "dev-master"
+        "symfony/var-dumper": "6.1.x-dev"
     },
     "require": {
-        "spatie/data-transfer-object": "^2.8"
+        "spatie/data-transfer-object": "^2.8",
+        "wsdltophp/packagegenerator": "dev-master"
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Wefabric\MessageSender\MessageService31_Solar\ServiceType;
+namespace Wefabric\MessageSender\BaseService;
 
 use SoapHeader;
 use WsdlToPhp\PackageBase\AbstractSoapClientBase;

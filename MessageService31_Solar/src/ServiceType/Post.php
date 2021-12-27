@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Wefabric\MessageSender\MessageService31_Solar\ServiceType;
 
 use SoapFault;
+use Wefabric\MessageSender\BaseService\BaseService;
 use Wefabric\MessageSender\MessageService31_Solar\StructType\Security;
 use Wefabric\MessageSender\MessageService31_Solar\StructType\CustomInfoType;
 use Wefabric\MessageSender\MessageService31_Solar\StructType\MessageResponseType;
