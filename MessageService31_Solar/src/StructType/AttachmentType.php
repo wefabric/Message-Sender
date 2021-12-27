@@ -88,7 +88,7 @@ class AttachmentType extends AbstractStructBase
     /**
      * Set FileType value
      * @param string $fileType
-     * @return \Wefabric\MessageSender\MessageService31_Solar\StructType\AttachmentType
+     * @return AttachmentType
      */
     public function setFileType(string $fileType): self
     {
@@ -111,7 +111,7 @@ class AttachmentType extends AbstractStructBase
     /**
      * Set URL value
      * @param string $uRL
-     * @return \Wefabric\MessageSender\MessageService31_Solar\StructType\AttachmentType
+     * @return AttachmentType
      */
     public function setURL(?string $uRL): self
     {
@@ -134,7 +134,7 @@ class AttachmentType extends AbstractStructBase
     /**
      * Set DocumentType value
      * @param string $documentType
-     * @return \Wefabric\MessageSender\MessageService31_Solar\StructType\AttachmentType
+     * @return AttachmentType
      */
     public function setDocumentType(?string $documentType = null): self
     {
@@ -157,7 +157,7 @@ class AttachmentType extends AbstractStructBase
     /**
      * Set FileName value
      * @param string $fileName
-     * @return \Wefabric\MessageSender\MessageService31_Solar\StructType\AttachmentType
+     * @return AttachmentType
      */
     public function setFileName(?string $fileName = null): self
     {
@@ -180,7 +180,7 @@ class AttachmentType extends AbstractStructBase
     /**
      * Set AttachedData value
      * @param string $attachedData
-     * @return \Wefabric\MessageSender\MessageService31_Solar\StructType\AttachmentType
+     * @return AttachmentType
      */
     public function setAttachedData(?string $attachedData): self
     {

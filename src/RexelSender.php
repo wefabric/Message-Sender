@@ -41,15 +41,10 @@ class RexelSender extends MessageSender
      */
     function getHttpOptions(): array
     {
-        return [
+        return array_merge(parent::getHttpOptions(), [
             SoapClientInterface::WSDL_URL => $this->url,
-            SoapClientInterface::WSDL_CLASSMAP => MessageService31_Rexel\ClassMap::get() /** ,
-            SoapClientInterface::WSDL_SOAP_VERSION => SOAP_1_1, //OK
-            SoapClientInterface::WSDL_CONNECTION_TIMEOUT => 60,
-            SoapClientInterface::WSDL_CACHE_WSDL => WSDL_CACHE_NONE /**  ,
-            SoapClientInterface::WSDL_LOGIN => $this->inlogCode,
-            SoapClientInterface::WSDL_PASSWORD => $this->password /**/
-        ];
+            SoapClientInterface::WSDL_CLASSMAP => MessageService31_Rexel\ClassMap::get()
+        ]);
     }
 
     /**
@@ -72,7 +67,6 @@ class RexelSender extends MessageSender
     {
         return new CustomInfoType($this->isTestMessage, $this->languageCode, $this->isContentCompressed, $this->applicationID, $this->versionID, $this->relationID);
     }
-
 
     function getNewMessage(string $msgID): MessageType
     {

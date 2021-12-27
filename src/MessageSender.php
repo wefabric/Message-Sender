@@ -3,6 +3,7 @@
 namespace Wefabric\MessageSender;
 
 use Spatie\DataTransferObject\DataTransferObject;
+use WsdlToPhp\PackageBase\SoapClientInterface;
 
 abstract class MessageSender extends DataTransferObject
 {
@@ -38,7 +39,14 @@ abstract class MessageSender extends DataTransferObject
     /**
      * @return array
      */
-    abstract function getHttpOptions(): array;
+    function getHttpOptions(): array
+    {
+        return [
+            SoapClientInterface::WSDL_SOAP_VERSION => SOAP_1_1, //OK
+            SoapClientInterface::WSDL_CONNECTION_TIMEOUT => 60,
+            SoapClientInterface::WSDL_CACHE_WSDL => WSDL_CACHE_NONE
+        ];
+    }
 
     /**
      * @param string $msgID
