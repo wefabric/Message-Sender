@@ -4,6 +4,7 @@ namespace Wefabric\MessageSender;
 
 use DateTime;
 use DateTimeInterface;
+use SimpleXMLElement;
 use WsdlToPhp\PackageBase\SoapClientInterface;
 
 use Wefabric\MessageSender\MessageService31_Solar\ServiceType\Post;
@@ -79,5 +80,30 @@ class SolarSender extends MessageSender
         );
     }
 
+    public function formatMessage(array $data): SimpleXMLElement
+    {
+        if(isset($data['DeliveryParty']['GLN'])) {
+            unset($data['DeliveryParty']['GLN']);
+        } // Remove GLN from DeliveryParty
 
+        if(isset($data['DeliveryParty']['ContactInformation'])) {
+            $data['DeliveryParty']['Contactgegevens'] = $data['DeliveryParty']['ContactInformation'];
+            unset($data['DeliveryParty']['ContactInformation']);
+        } // Rename DeliveryParty->ContactInformation to ContactInformation
+
+        foreach($data['OrderLine'] as $i => $orderLine)  {
+            if(isset($orderLine['LineIdentification'])) {
+                $newOrderLine = [];
+                foreach($orderLine as $key => $value){
+                    if($key === 'LineIdentification') {
+                        $key = 'LineIdentitfication';
+                    }
+                    $newOrderLine[$key] = $value;
+                }
+                $data['OrderLine'][$i] = $newOrderLine;
+            }
+        } // Rename Orderline->LineIdentification to LineIdentitfication
+
+        return parent::formatMessage($data);
+    }
 }

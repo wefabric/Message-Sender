@@ -2,7 +2,9 @@
 
 namespace Wefabric\MessageSender;
 
+use SimpleXMLElement;
 use Spatie\DataTransferObject\DataTransferObject;
+use Wefabric\GS1InsbouOrderConverter\ArrayToXML;
 use WsdlToPhp\PackageBase\SoapClientInterface;
 
 abstract class MessageSender extends DataTransferObject
@@ -53,4 +55,16 @@ abstract class MessageSender extends DataTransferObject
      * @return object
      */
     abstract function getNewMessage(string $msgID): object;
+
+    /**
+     * @param array $data
+     * @return SimpleXMLElement
+     */
+    function formatMessage(array $data): SimpleXMLElement
+    {
+        $xml = new SimpleXMLElement('<Order xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Order_insbou003.xsd" />');
+        ArrayToXML::arrayToXML($xml, $data);
+        return $xml;
+    }
+
 }

@@ -27,6 +27,13 @@
     },
     "require": {
         "spatie/data-transfer-object": "^2.8",
-        "wsdltophp/packagegenerator": "dev-master"
-    }
+        "wsdltophp/packagegenerator": "dev-master",
+        "wefabric/gs1-insbou-order-converter": "*"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/wefabric/GS1-insbou-order-converter"
+        }
+    ]
 }

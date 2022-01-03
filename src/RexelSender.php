@@ -4,6 +4,7 @@ namespace Wefabric\MessageSender;
 
 use DateTime;
 use DateTimeInterface;
+use SimpleXMLElement;
 use WsdlToPhp\PackageBase\SoapClientInterface;
 
 use Wefabric\MessageSender\MessageService31_Rexel\ServiceType\Post;
@@ -71,6 +72,30 @@ class RexelSender extends MessageSender
     function getNewMessage(string $msgID): MessageType
     {
         return new MessageType(msgProperties: new MessageList($msgID, (new DateTime())->format(DateTimeInterface::RFC3339), $this->msgFormat, $this->msgVersion, $this->msgType));
+    }
+
+
+    function formatMessage(array $data): SimpleXMLElement
+    {
+
+        if(isset($data['DeliveryParty']['LocationDescription'])) {
+            unset($data['DeliveryParty']['LocationDescription']);
+        } // Remove LocationDescription from DeliveryParty
+
+        foreach($data['OrderLine'] as $i => $orderLine)  {
+            if(isset($orderLine['LineIdentification'])) {
+                $newOrderLine = [];
+                foreach($orderLine as $key => $value){
+                    if($key === 'LineIdentification') {
+                        $key = 'LineIdentitfication';
+                    }
+                    $newOrderLine[$key] = $value;
+                }
+                $data['OrderLine'][$i] = $newOrderLine;
+            }
+        } // Rename Orderline->LineIdentification to LineIdentitfication
+
+        return parent::formatMessage($data);
     }
 
 }
