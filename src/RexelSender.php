@@ -69,12 +69,19 @@ class RexelSender extends MessageSender
         return new CustomInfoType($this->isTestMessage, $this->languageCode, $this->isContentCompressed, $this->applicationID, $this->versionID, $this->relationID);
     }
 
+    /**
+     * @param string $msgID
+     * @return MessageType
+     */
     function getNewMessage(string $msgID): MessageType
     {
         return new MessageType(msgProperties: new MessageList($msgID, (new DateTime())->format(DateTimeInterface::RFC3339), $this->msgFormat, $this->msgVersion, $this->msgType));
     }
 
-
+    /**
+     * @param array $data
+     * @return SimpleXMLElement
+     */
     function formatMessage(array $data): SimpleXMLElement
     {
         

@@ -7,6 +7,7 @@ use WsdlToPhp\PackageBase\AbstractSoapClientBase;
 
 class BaseService extends AbstractSoapClientBase
 {
+    //for the Security header.
     const SecurityNS = 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd';
 
     /**

@@ -68,6 +68,7 @@ class SolarSender extends MessageSender
 
 
     /**
+     * @param bool $includeTimestamp
      * @return Security
      */
     function getSecurity(bool $includeTimestamp = false): Security
@@ -80,6 +81,10 @@ class SolarSender extends MessageSender
         );
     }
 
+    /**
+     * @param array $data
+     * @return SimpleXMLElement
+     */
     public function formatMessage(array $data): SimpleXMLElement
     {
         if(isset($data['DeliveryParty']['GLN'])) {
