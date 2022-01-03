@@ -77,10 +77,11 @@ class RexelSender extends MessageSender
 
     function formatMessage(array $data): SimpleXMLElement
     {
-
-        if(isset($data['DeliveryParty']['LocationDescription'])) {
-            unset($data['DeliveryParty']['LocationDescription']);
-        } // Remove LocationDescription from DeliveryParty
+        
+        if(isset($data['DeliveryParty']['ContactInformation'])) {
+            $data['DeliveryParty']['Contactgegevens'] = $data['DeliveryParty']['ContactInformation'];
+            unset($data['DeliveryParty']['ContactInformation']);
+        } // Rename DeliveryParty->ContactInformation to ContactInformation
 
         foreach($data['OrderLine'] as $i => $orderLine)  {
             if(isset($orderLine['LineIdentification'])) {

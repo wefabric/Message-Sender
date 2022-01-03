@@ -86,6 +86,10 @@ class SolarSender extends MessageSender
             unset($data['DeliveryParty']['GLN']);
         } // Remove GLN from DeliveryParty
 
+        if(isset($data['DeliveryParty']['LocationDescription'])) {
+            unset($data['DeliveryParty']['LocationDescription']);
+        } // Remove LocationDescription from DeliveryParty
+
         if(isset($data['DeliveryParty']['ContactInformation'])) {
             $data['DeliveryParty']['Contactgegevens'] = $data['DeliveryParty']['ContactInformation'];
             unset($data['DeliveryParty']['ContactInformation']);
