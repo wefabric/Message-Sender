@@ -18,7 +18,7 @@ abstract class MessageSender extends DataTransferObject
     protected bool $isTestMessage = false;
     protected ?string $languageCode = 'NL';
     protected bool $isContentCompressed = false;
-    protected string $applicationID = 'x';
+    protected string $applicationID = 'Elektrobode';
     protected string $versionID = '';
 
     // for MessageProperties :
