@@ -5,6 +5,8 @@ namespace Wefabric\MessageSender;
 use DateTime;
 use DateTimeInterface;
 use SimpleXMLElement;
+use Wefabric\MessageSender\MessageService31_Rexel\ServiceType\Get;
+use Wefabric\MessageSender\MessageService31_Rexel\StructType\AvailableMessagesRequestType;
 use WsdlToPhp\PackageBase\SoapClientInterface;
 
 use Wefabric\MessageSender\MessageService31_Rexel\ServiceType\Post;
@@ -33,6 +35,13 @@ class RexelSender extends MessageSender
     function getPost(): Post
     {
         return (new Post($this->getHttpOptions()))
+            ->setSoapHeaderSecurity($this->getSecurity())
+            ->setSoapHeaderCustomInfo($this->getCustomInfo());
+    }
+
+    public function getGet(): object
+    {
+        return (new Get($this->getHttpOptions()))
             ->setSoapHeaderSecurity($this->getSecurity())
             ->setSoapHeaderCustomInfo($this->getCustomInfo());
     }
@@ -76,6 +85,11 @@ class RexelSender extends MessageSender
     function getNewMessage(string $msgID): MessageType
     {
         return new MessageType(msgProperties: new MessageList($msgID, (new DateTime())->format(DateTimeInterface::RFC3339), $this->msgFormat, $this->msgVersion, $this->msgType));
+    }
+
+    public function getAvailableMessageRequest(): AvailableMessagesRequestType
+    {
+        return new AvailableMessagesRequestType(''); //empty: don't filter on type.
     }
 
     /**

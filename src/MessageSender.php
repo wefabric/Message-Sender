@@ -39,6 +39,12 @@ abstract class MessageSender extends DataTransferObject
     abstract function getPost(): object;
 
     /**
+     * @return object A complete Get-object to use and receive data from the set URL and credentials.
+     * Use: $response = $get->GetAvailableMessages($request);
+     */
+    abstract function getGet(): object;
+
+    /**
      * @return array
      */
     function getHttpOptions(): array
@@ -55,6 +61,11 @@ abstract class MessageSender extends DataTransferObject
      * @return object
      */
     abstract function getNewMessage(string $msgID): object;
+
+    /**
+     * @return object
+     */
+    abstract function getAvailableMessageRequest(): object;
 
     /**
      * @param array $data

@@ -44,7 +44,7 @@ class AvailableMessagesRequestType extends AbstractStructBase
     /**
      * Set MsgType value
      * @param string $msgType
-     * @return \Wefabric\MessageSender\MessageService31_Solar\StructType\AvailableMessagesRequestType
+     * @return AvailableMessagesRequestType
      */
     public function setMsgType(?string $msgType): self
     {

@@ -5,6 +5,12 @@ declare(strict_types=1);
 namespace Wefabric\MessageSender\MessageService31_Solar\ServiceType;
 
 use SoapFault;
+use Wefabric\MessageSender\MessageService31_Solar\StructType\AvailableMessagesRequestType;
+use Wefabric\MessageSender\MessageService31_Solar\StructType\AvailableMessagesResponseType;
+use Wefabric\MessageSender\MessageService31_Solar\StructType\CustomInfoType;
+use Wefabric\MessageSender\MessageService31_Solar\StructType\MessageRequestResponseType;
+use Wefabric\MessageSender\MessageService31_Solar\StructType\MessageRequestType;
+use Wefabric\MessageSender\MessageService31_Solar\StructType\Security;
 use WsdlToPhp\PackageBase\AbstractSoapClientBase;
 use Wefabric\MessageSender\BaseService\BaseService;
 
@@ -14,16 +20,31 @@ use Wefabric\MessageSender\BaseService\BaseService;
  */
 class Get extends BaseService
 {
+
     /**
-     * Sets the CustomInfo SoapHeader param
-     * @uses AbstractSoapClientBase::setSoapHeader()
-     * @param \Wefabric\MessageSender\MessageService31_Solar\StructType\CustomInfoType $customInfo
+     * Sets the Security SoapHeader param
+     * @param Security $security
      * @param string $namespace
      * @param bool $mustUnderstand
      * @param string $actor
-     * @return \Wefabric\MessageSender\MessageService31_Solar\ServiceType\Get
+     * @return Post
+     *@uses AbstractSoapClientBase::setSoapHeader()
      */
-    public function setSoapHeaderCustomInfo(\Wefabric\MessageSender\MessageService31_Solar\StructType\CustomInfoType $customInfo, string $namespace = 'https://www.ketenstandaard.nl/WS/MessageService/3.1', bool $mustUnderstand = false, ?string $actor = null): self
+    public function setSoapHeaderSecurity(Security $security, string $namespace = BaseService::SecurityNS, bool $mustUnderstand = false, ?string $actor = null): self
+    {
+        return $this->setSoapHeader($namespace, 'Security', $security, $mustUnderstand, $actor);
+    }
+
+    /**
+     * Sets the CustomInfo SoapHeader param
+     * @uses AbstractSoapClientBase::setSoapHeader()
+     * @param CustomInfoType $customInfo
+     * @param string $namespace
+     * @param bool $mustUnderstand
+     * @param string $actor
+     * @return Get
+     */
+    public function setSoapHeaderCustomInfo(CustomInfoType $customInfo, string $namespace = 'https://www.ketenstandaard.nl/WS/MessageService/3.1', bool $mustUnderstand = false, ?string $actor = null): self
     {
         return $this->setSoapHeader($namespace, 'CustomInfo', $customInfo, $mustUnderstand, $actor);
     }
@@ -39,10 +60,10 @@ class Get extends BaseService
      * @uses AbstractSoapClientBase::getSoapClient()
      * @uses AbstractSoapClientBase::setResult()
      * @uses AbstractSoapClientBase::saveLastError()
-     * @param \Wefabric\MessageSender\MessageService31_Solar\StructType\AvailableMessagesRequestType $availableMessagesRequest
-     * @return \Wefabric\MessageSender\MessageService31_Solar\StructType\AvailableMessagesResponseType|bool
+     * @param AvailableMessagesRequestType $availableMessagesRequest
+     * @return AvailableMessagesResponseType|bool
      */
-    public function GetAvailableMessages(\Wefabric\MessageSender\MessageService31_Solar\StructType\AvailableMessagesRequestType $availableMessagesRequest)
+    public function GetAvailableMessages(AvailableMessagesRequestType $availableMessagesRequest)
     {
         try {
             $this->setResult($resultGetAvailableMessages = $this->getSoapClient()->__soapCall('GetAvailableMessages', [
@@ -69,10 +90,10 @@ class Get extends BaseService
      * @uses AbstractSoapClientBase::getSoapClient()
      * @uses AbstractSoapClientBase::setResult()
      * @uses AbstractSoapClientBase::saveLastError()
-     * @param \Wefabric\MessageSender\MessageService31_Solar\StructType\MessageRequestType $messageRequest
-     * @return \Wefabric\MessageSender\MessageService31_Solar\StructType\MessageRequestResponseType|bool
+     * @param MessageRequestType $messageRequest
+     * @return MessageRequestResponseType|bool
      */
-    public function GetMessage(\Wefabric\MessageSender\MessageService31_Solar\StructType\MessageRequestType $messageRequest)
+    public function GetMessage(MessageRequestType $messageRequest)
     {
         try {
             $this->setResult($resultGetMessage = $this->getSoapClient()->__soapCall('GetMessage', [
@@ -88,8 +109,8 @@ class Get extends BaseService
     }
     /**
      * Returns the result
-     * @see AbstractSoapClientBase::getResult()
-     * @return \Wefabric\MessageSender\MessageService31_Solar\StructType\AvailableMessagesResponseType|\Wefabric\MessageSender\MessageService31_Solar\StructType\MessageRequestResponseType
+     * @return AvailableMessagesResponseType|MessageRequestResponseType
+     *@see AbstractSoapClientBase::getResult()
      */
     public function getResult()
     {

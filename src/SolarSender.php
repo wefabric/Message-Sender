@@ -5,6 +5,8 @@ namespace Wefabric\MessageSender;
 use DateTime;
 use DateTimeInterface;
 use SimpleXMLElement;
+use Wefabric\MessageSender\MessageService31_Solar\ServiceType\Get;
+use Wefabric\MessageSender\MessageService31_Solar\StructType\AvailableMessagesRequestType;
 use WsdlToPhp\PackageBase\SoapClientInterface;
 
 use Wefabric\MessageSender\MessageService31_Solar\ServiceType\Post;
@@ -38,6 +40,13 @@ class SolarSender extends MessageSender
             ->setSoapHeaderCustomInfo($this->getCustomInfo());
     }
 
+    function getGet(): Get
+    {
+        return (new Get($this->getHttpOptions()))
+            ->setSoapHeaderSecurity($this->getSecurity())
+            ->setSoapHeaderCustomInfo($this->getCustomInfo());
+    }
+
     /**
      * @return array
      */
@@ -66,6 +75,10 @@ class SolarSender extends MessageSender
         return new MessageType(msgContent: '', msgProperties: new MessagePropertiesType((new DateTime())->format(DateTimeInterface::RFC3339), $msgID, $this->msgFormat, $this->msgVersion, $this->msgType));
     }
 
+    function getAvailableMessageRequest(): AvailableMessagesRequestType
+    {
+        return new AvailableMessagesRequestType(''); //empty: don't filter on type.
+    }
 
     /**
      * @param bool $includeTimestamp

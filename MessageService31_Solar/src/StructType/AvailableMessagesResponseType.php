@@ -19,13 +19,13 @@ class AvailableMessagesResponseType extends AbstractStructBase
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * - nillable: true
-     * @var \Wefabric\MessageSender\MessageService31_Solar\StructType\MessagePropertiesType[]
+     * @var MessagePropertiesType[]
      */
     protected ?array $MessageList = null;
     /**
      * Constructor method for AvailableMessagesResponseType
-     * @uses AvailableMessagesResponseType::setMessageList()
-     * @param \Wefabric\MessageSender\MessageService31_Solar\StructType\MessagePropertiesType[] $messageList
+     * @param MessagePropertiesType[] $messageList
+     *@uses AvailableMessagesResponseType::setMessageList()
      */
     public function __construct(?array $messageList = null)
     {
@@ -37,7 +37,7 @@ class AvailableMessagesResponseType extends AbstractStructBase
      * An additional test has been added (isset) before returning the property value as
      * this property may have been unset before, due to the fact that this property is
      * removable from the request (nillable=true+minOccurs=0)
-     * @return \Wefabric\MessageSender\MessageService31_Solar\StructType\MessagePropertiesType[]
+     * @return MessagePropertiesType[]
      */
     public function getMessageList(): ?array
     {
@@ -58,7 +58,7 @@ class AvailableMessagesResponseType extends AbstractStructBase
         $invalidValues = [];
         foreach ($values as $availableMessagesResponseTypeMessageListItem) {
             // validation for constraint: itemType
-            if (!$availableMessagesResponseTypeMessageListItem instanceof \Wefabric\MessageSender\MessageService31_Solar\StructType\MessagePropertiesType) {
+            if (!$availableMessagesResponseTypeMessageListItem instanceof MessagePropertiesType) {
                 $invalidValues[] = is_object($availableMessagesResponseTypeMessageListItem) ? get_class($availableMessagesResponseTypeMessageListItem) : sprintf('%s(%s)', gettype($availableMessagesResponseTypeMessageListItem), var_export($availableMessagesResponseTypeMessageListItem, true));
             }
         }
@@ -73,9 +73,9 @@ class AvailableMessagesResponseType extends AbstractStructBase
      * Set MessageList value
      * This property is removable from request (nillable=true+minOccurs=0), therefore
      * if the value assigned to this property is null, it is removed from this object
-     * @throws InvalidArgumentException
-     * @param \Wefabric\MessageSender\MessageService31_Solar\StructType\MessagePropertiesType[] $messageList
+     * @param MessagePropertiesType[] $messageList
      * @return \Wefabric\MessageSender\MessageService31_Solar\StructType\AvailableMessagesResponseType
+     *@throws InvalidArgumentException
      */
     public function setMessageList(?array $messageList = null): self
     {
@@ -93,14 +93,14 @@ class AvailableMessagesResponseType extends AbstractStructBase
     }
     /**
      * Add item to MessageList value
-     * @throws InvalidArgumentException
-     * @param \Wefabric\MessageSender\MessageService31_Solar\StructType\MessagePropertiesType $item
+     * @param MessagePropertiesType $item
      * @return \Wefabric\MessageSender\MessageService31_Solar\StructType\AvailableMessagesResponseType
+     *@throws InvalidArgumentException
      */
-    public function addToMessageList(\Wefabric\MessageSender\MessageService31_Solar\StructType\MessagePropertiesType $item): self
+    public function addToMessageList(MessagePropertiesType $item): self
     {
         // validation for constraint: itemType
-        if (!$item instanceof \Wefabric\MessageSender\MessageService31_Solar\StructType\MessagePropertiesType) {
+        if (!$item instanceof MessagePropertiesType) {
             throw new InvalidArgumentException(sprintf('The MessageList property can only contain items of type \Wefabric\MessageSender\MessageService31_Solar\StructType\MessagePropertiesType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->MessageList[] = $item;

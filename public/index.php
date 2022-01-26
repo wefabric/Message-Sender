@@ -45,30 +45,71 @@ $messageType = null;
 if(! array_key_exists('a', $params)) {
     dd('Geen geldige parameter \'?a=\' gevonden. Verwacht: tu,rexel,solar. ');
 } else if($params['a'] == 'rexel') {
-    $post = $RexelAlfana->getPost();
-    $xml = simplexml_load_file('./order-RexelAlfana.xml');
-    $message = $RexelAlfana->getNewMessage(newMsgID())->setMsgContent($xml->asXML());
+    if($params['q'] == 'get') {
+        $get = $RexelAlfana->getGet();
+        $request = $RexelAlfana->getAvailableMessageRequest();
+    } else {
+        $post = $RexelAlfana->getPost();
+        $xml = simplexml_load_file('./order-RexelAlfana.xml');
+        $message = $RexelAlfana->getNewMessage(newMsgID())->setMsgContent($xml->asXML());
+    }
     //dump($RexelAlfana);
 } else if($params['a'] == 'solar') {
-    $post = $SolarAlfana->getPost();
-    $xml = simplexml_load_file('./order-SolarAlfana.xml');
-    $message = $SolarAlfana->getNewMessage(newMsgID())->setMsgContent($xml->asXML());
+    if($params['q'] == 'get') {
+        $get = $SolarAlfana->getGet();
+        $request = $SolarAlfana->getAvailableMessageRequest();
+    } else {
+        $post = $SolarAlfana->getPost();
+        $xml = simplexml_load_file('./order-SolarAlfana.xml');
+        $message = $SolarAlfana->getNewMessage(newMsgID())->setMsgContent($xml->asXML());
+    }
     //dump($SolarAlfana);
 } else {
     dd('Geen geldige parameter \'?a=\' gevonden. Verwacht: rexel,solar. Gekregen: \'' . $params['a'] . '\'');
 }
-if ($post->PostMessage($message) !== false) {
-    $response = $post->getResult()->getMessage()->getMsgContent();
-    $orderResponseXML = simplexml_load_string($response);
 
-    dump($response);
-    dump($orderResponseXML);
-} else {
-    $responseXML = new SimpleXMLElement('<error/>');
-    foreach($post->getLastError() as $key => $value){
-        $responseXML->addChild($key,$value);
+if(!$params['q'] || $params['q'] == 'post') {
+    if ($post->PostMessage($message)) {
+        $response = $post->getResult()->getMessage()->getMsgContent();
+        $orderResponseXML = simplexml_load_string($response);
+
+        dump($response);
+        dump($orderResponseXML);
+    } else {
+        dump($post);
+        dump($post->getResult());
+        dump($post->getLastError());
+        $responseXML = new SimpleXMLElement('<error/>');
+        foreach($post->getLastError() as $key => $value){
+            $responseXML->addChild($key,$value);
+        }
+        dump($responseXML->asXML());
+
+
+//    /** @var SoapFault $value */
+//    foreach($post->getLastError() as $key => $value) {
+//        dump($key);
+//        dump($value);
+//        if( $value instanceof SoapFault) {
+//            dump($value->getMessage(), $value->faultcode);
+//        }
+//    }
     }
-    dump($responseXML->asXML());
+
+} elseif ($params['q'] == 'get') {
+    if($get->GetAvailableMessages($request)) {
+        dump($get);
+        if($messageList = $get->getResult()->getMessageList()) { //also checks if $messageList !== null
+            dump($messageList);
+
+            foreach($messageList as $message) {
+                dump($message);
+            }
+        }
+    } else {
+        dump($get);
+        dump($get->getLastError());
+    }
 
 }
 
