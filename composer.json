@@ -28,12 +28,17 @@
     "require": {
         "spatie/data-transfer-object": "^2.8",
         "wsdltophp/packagegenerator": "dev-master",
-        "wefabric/array-to-simplexml": "*"
+        "wefabric/array-to-simplexml": "*",
+        "wefabric/simplexml-to-array": "*"
     },
     "repositories": [
         {
             "type": "vcs",
             "url": "https://github.com/wefabric/array-to-simplexml"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/wefabric/simplexml-to-array"
         }
     ]
 }

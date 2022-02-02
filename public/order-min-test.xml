@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<Order xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Order_insbou003.xsd">
+    <OrderType>220</OrderType>
+    <OrderNumber>ORD001</OrderNumber>
+    <OrderDate>2012-03-01</OrderDate>
+    <OrderTime>05:10:10</OrderTime>
+    <Buyer>
+        <GLN>1234567890120</GLN>
+    </Buyer>
+    <Supplier>
+        <GLN>1234567890121</GLN>
+    </Supplier>
+    <OrderLine>
+        <LineNumber>1</LineNumber>
+        <OrderedQuantity>10</OrderedQuantity>
+        <LineIdentification>1</LineIdentification>
+    </OrderLine>
+</Order>

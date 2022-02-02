@@ -51,7 +51,8 @@ if(! array_key_exists('a', $params)) {
     } else {
         $post = $RexelAlfana->getPost();
         $xml = simplexml_load_file('./order-RexelAlfana.xml');
-        $message = $RexelAlfana->getNewMessage(newMsgID())->setMsgContent($xml->asXML());
+        $message = $RexelAlfana->getNewMessage(newMsgID())
+            ->setMsgContent($RexelAlfana->formatMessage(SimplexmlToArray::convert($xml))->asXML());
     }
     //dump($RexelAlfana);
 } else if($params['a'] == 'solar') {
@@ -61,7 +62,8 @@ if(! array_key_exists('a', $params)) {
     } else {
         $post = $SolarAlfana->getPost();
         $xml = simplexml_load_file('./order-SolarAlfana.xml');
-        $message = $SolarAlfana->getNewMessage(newMsgID())->setMsgContent($xml->asXML());
+        $message = $SolarAlfana->getNewMessage(newMsgID())
+            ->setMsgContent($SolarAlfana->formatMessage(SimplexmlToArray::convert($xml))->asXML());
     }
     //dump($SolarAlfana);
 } else {

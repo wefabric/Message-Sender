@@ -1,0 +1,173 @@
+<?xml version="1.0"?>
+<Order xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Order_insbou003.xsd">
+    <OrderType>220</OrderType>
+    <OrderNumber>ORD001</OrderNumber>
+    <OrderDate>2012-03-01</OrderDate>
+    <OrderTime>05:10:10</OrderTime>
+    <ScenarioTypeCode>X1</ScenarioTypeCode>
+    <DraftOrderIndicator>16</DraftOrderIndicator>
+    <DeliveryOnDemandIndicator>73E</DeliveryOnDemandIndicator>
+    <CustomerOrderReference>
+        <EndCustomerOrderNumber>Eindafnemer001</EndCustomerOrderNumber>
+    </CustomerOrderReference>
+    <ContractReference>
+        <ContractNumber>CONTR2012-001</ContractNumber>
+        <ContractDate>2012-01-01</ContractDate>
+    </ContractReference>
+    <ProjectReference>
+        <ProjectNumber>PROJ001</ProjectNumber>
+    </ProjectReference>
+    <DeliveryConditions>
+        <BackhaulingIndicator>4</BackhaulingIndicator>
+    </DeliveryConditions>
+    <TransportInstruction>
+        <TransportInstructionTypeCode>CRN</TransportInstructionTypeCode>
+        <DeliveryNoteText>Take pallet and packing materials retour.</DeliveryNoteText>
+    </TransportInstruction>
+    <AdditionalInformation>
+        <FreeText>Do not give pallet with cookies to blue-haired person!</FreeText>
+    </AdditionalInformation>
+    <DeliveryDateTimeInformation>
+        <RequiredDeliveryDate>2012-03-03</RequiredDeliveryDate>
+        <RequiredDeliveryTime>06:00:00</RequiredDeliveryTime>
+        <DeliveryTimeFrame>
+            <DeliveryDateEarliest>2012-03-03</DeliveryDateEarliest>
+            <DeliveryTimeEarliest>06:00:00</DeliveryTimeEarliest>
+            <DeliveryDateLatest>2012-03-05</DeliveryDateLatest>
+            <DeliveryTimeLatest>18:00:00</DeliveryTimeLatest>
+        </DeliveryTimeFrame>
+    </DeliveryDateTimeInformation>
+    <Buyer>
+        <ContactInformation>
+            <ContactPersonName>Pietje Puk</ContactPersonName>
+            <PhoneNumber>0031600000000</PhoneNumber>
+            <EmailAddress>noreply@donotmail.com</EmailAddress>
+        </ContactInformation>
+        <Name>Wefabric</Name>
+        <Name2> web &amp; marketing</Name2>
+        <StreetAndNumber>Iepenlaan 7</StreetAndNumber>
+        <City>Sneek</City>
+        <PostalCode>8603CE</PostalCode>
+        <Country>NL</Country>
+        <GLN>1234567890120</GLN>
+    </Buyer>
+    <Supplier>
+        <Name>Wefabric</Name>
+        <Name2> web &amp; marketing</Name2>
+        <StreetAndNumber>Iepenlaan 7a</StreetAndNumber>
+        <City>Sneek</City>
+        <PostalCode>8603CE</PostalCode>
+        <Country>NL</Country>
+        <GLN>1234567890121</GLN>
+    </Supplier>
+    <DeliveryParty>
+        <LocationDescription>Can't miss it.</LocationDescription>
+        <ContactInformation>
+            <ContactPersonName>Pietje Puk</ContactPersonName>
+            <PhoneNumber>0600000000</PhoneNumber>
+        </ContactInformation>
+        <Name>Wefabric</Name>
+        <Name2> web &amp; marketing</Name2>
+        <StreetAndNumber>Iepenlaan 7b</StreetAndNumber>
+        <City>Sneek</City>
+        <PostalCode>8603CE</PostalCode>
+        <Country>NL</Country>
+        <GLN>1234567890122</GLN>
+    </DeliveryParty>
+    <Invoicee>
+        <GLN>1234567890125</GLN>
+    </Invoicee>
+    <UltimateConsignee>
+        <Name>Wefabric</Name>
+        <Name2> web &amp; marketing</Name2>
+        <StreetAndNumber>Iepenlaan 7c</StreetAndNumber>
+        <City>Sneek</City>
+        <PostalCode>8603CE</PostalCode>
+        <Country>NL</Country>
+        <GLN>1234567890123</GLN>
+    </UltimateConsignee>
+    <ShipFrom>
+        <Name>Wefabric</Name>
+        <Name2> web &amp; marketing</Name2>
+        <StreetAndNumber>Iepenlaan 7d</StreetAndNumber>
+        <City>Sneek</City>
+        <PostalCode>8603CE</PostalCode>
+        <Country>NL</Country>
+        <GLN>1234567890124</GLN>
+    </ShipFrom>
+    <PurchasingOrganisation>
+        <Name>Wefabric</Name>
+        <Name2> web &amp; marketing</Name2>
+        <StreetAndNumber>Iepenlaan 7e</StreetAndNumber>
+        <City>Sneek</City>
+        <PostalCode>8603CE</PostalCode>
+        <Country>NL</Country>
+        <GLN>1234567890126</GLN>
+    </PurchasingOrganisation>
+    <Carrier>
+        <Name>Wefabric</Name>
+        <Name2> web &amp; marketing</Name2>
+        <StreetAndNumber>Iepenlaan 7f</StreetAndNumber>
+        <City>Sneek</City>
+        <PostalCode>8603CE</PostalCode>
+        <Country>NL</Country>
+        <GLN>1234567890127</GLN>
+    </Carrier>
+    <OrderLine>
+        <LineNumber>1</LineNumber>
+        <OrderedQuantity>10</OrderedQuantity>
+        <OrderedQuantityMeasureUnitCode>PCE</OrderedQuantityMeasureUnitCode>
+        <LineIdentification>1</LineIdentification>
+        <TradeItemIdentification>
+            <GTIN>12345678901211</GTIN>
+            <SuppliersTradeItemIdentification>idfk</SuppliersTradeItemIdentification>
+            <AdditionalItemIdentification>
+                <TradeItemDescription>Cookies</TradeItemDescription>
+                <Colour>Lightbrown</Colour>
+                <Size>enormous</Size>
+                <SerialNumber>1</SerialNumber>
+                <PhysicalDimensions>
+                    <Width>5</Width>
+                    <Length>5</Length>
+                    <Height>5</Height>
+                    <MeasurementUnitCode>MTR</MeasurementUnitCode>
+                </PhysicalDimensions>
+            </AdditionalItemIdentification>
+        </TradeItemIdentification>
+        <TradeItemProcessing>
+            <ProcessingGTIN>12345678901212</ProcessingGTIN>
+            <ProcessingSequence>1</ProcessingSequence>
+            <ProcessingDescription>Eating</ProcessingDescription>
+        </TradeItemProcessing>
+        <TransportInstruction>
+            <TransportInstructionTypeCode>PBE</TransportInstructionTypeCode>
+            <DeliveryNoteText>Protect the package well.</DeliveryNoteText>
+        </TransportInstruction>
+        <AdditionalInformation>
+            <FreeText>Contains special cookies. Do not eat.</FreeText>
+        </AdditionalInformation>
+        <DeliveryDateTimeInformation>
+            <RequiredDeliveryDate>2012-03-03</RequiredDeliveryDate>
+            <RequiredDeliveryTime>06:00:00</RequiredDeliveryTime>
+            <DeliveryTimeFrame>
+                <DeliveryDateEarliest>2012-03-03</DeliveryDateEarliest>
+                <DeliveryTimeEarliest>06:00:00</DeliveryTimeEarliest>
+                <DeliveryDateLatest>2012-03-05</DeliveryDateLatest>
+                <DeliveryTimeLatest>18:00:00</DeliveryTimeLatest>
+            </DeliveryTimeFrame>
+        </DeliveryDateTimeInformation>
+        <DifferentPriceAgreement>
+            <DifferentPriceAgreementIndicator>PPR</DifferentPriceAgreementIndicator>
+            <DifferentPrice>29</DifferentPrice>
+            <PriceBase>
+                <NumberOfUnitsInPriceBasis>1</NumberOfUnitsInPriceBasis>
+                <MeasureUnitPriceBasis>PCE</MeasureUnitPriceBasis>
+                <PriceBaseDescription>1 box of special cookies</PriceBaseDescription>
+            </PriceBase>
+        </DifferentPriceAgreement>
+        <ContractReference>
+            <ContractNumber>CONTR2012-001</ContractNumber>
+            <ContractDate>2012-01-01</ContractDate>
+        </ContractReference>
+    </OrderLine>
+</Order>
