@@ -44,7 +44,9 @@ function newMsgID() : string
     return 'TEST_WFEB_' . md5(rand()); // = 4.
 }
 
-$xml = simplexml_load_file('./order-test.xml');
+$xml = simplexml_load_file('./order-test.xml')->asXML();
+$xml = str_replace('%%BUYER_GLN%%', '8714231774051', $xml);
+$xml = str_replace('%%DELIVERYPARTY_GLN%%', '8714231774051', $xml);
 
 $messageType = null;
 if(! array_key_exists('a', $params)) {
@@ -55,8 +57,10 @@ if(! array_key_exists('a', $params)) {
         $request = $RexelAlfana->getAvailableMessageRequest();
     } else {
         $post = $RexelAlfana->getPost();
+        $xml = str_replace('%%SUPPLIER_GLN%%', '8713473009990', $xml);
+        $xml = str_replace('%%ITEM_ID%%', '2700320341', $xml);
         $message = $RexelAlfana->getNewMessage(newMsgID())
-            ->setMsgContent($RexelAlfana->formatMessage(SimplexmlToArray::convert($xml))->asXML());
+            ->setMsgContent($RexelAlfana->formatMessage(SimplexmlToArray::convert(new SimpleXMLElement($xml)))->asXML());
     }
     //dump($RexelAlfana);
 } else if($params['a'] == 'solar') {
@@ -65,8 +69,10 @@ if(! array_key_exists('a', $params)) {
         $request = $SolarAlfana->getAvailableMessageRequest();
     } else {
         $post = $SolarAlfana->getPost();
+        $xml = str_replace('%%SUPPLIER_GLN%%', '8711891990012', $xml);
+        $xml = str_replace('%%ITEM_ID%%', '2301056', $xml);
         $message = $SolarAlfana->getNewMessage(newMsgID())
-            ->setMsgContent($SolarAlfana->formatMessage(SimplexmlToArray::convert($xml))->asXML());
+            ->setMsgContent($SolarAlfana->formatMessage(SimplexmlToArray::convert(new SimpleXMLElement($xml)))->asXML());
     }
     //dump($SolarAlfana);
 } else {

@@ -41,7 +41,7 @@
         </DeliveryTimeFrame>
     </DeliveryDateTimeInformation>
     <Buyer>
-        <GLN>8714231774051</GLN>
+        <GLN>%%BUYER_GLN%%</GLN>
 <!--        <Name>Wefabric</Name>-->
 <!--        <Name2> web &amp; marketing</Name2>-->
 <!--        <StreetAndNumber>Iepenlaan 7</StreetAndNumber>-->
@@ -55,7 +55,7 @@
 <!--        </ContactInformation>-->
     </Buyer>
     <Supplier>
-        <GLN>8713473009990</GLN>
+        <GLN>%%SUPPLIER_GLN%%</GLN>
 <!--        <Name>Wefabric</Name>-->
 <!--        <Name2> web &amp; marketing</Name2>-->
 <!--        <StreetAndNumber>Iepenlaan 7a</StreetAndNumber>-->
@@ -64,7 +64,7 @@
 <!--        <Country>NL</Country>-->
     </Supplier>
     <DeliveryParty>
-        <GLN>8714231774051</GLN>
+        <GLN>%%DELIVERYPARTY_GLN%%</GLN>
         <Name>Elektrobode</Name>
 <!--        <Name2>Elektrotechniek &amp; Elektronica onderdelen online</Name2>-->
         <StreetAndNumber>Beatrixstraat 15</StreetAndNumber>
@@ -123,7 +123,7 @@
         <LineIdentification>1</LineIdentification>
         <TradeItemIdentification>
             <GTIN>12345678901211</GTIN>
-            <SuppliersTradeItemIdentification>2700320341</SuppliersTradeItemIdentification>
+            <SuppliersTradeItemIdentification>%%ITEM_ID%%</SuppliersTradeItemIdentification>
             <AdditionalItemIdentification>
                 <TradeItemDescription>Cookies</TradeItemDescription>
                 <Colour>Lightbrown</Colour>
