@@ -75,7 +75,7 @@ abstract class MessageSender extends DataTransferObject
     function formatMessage(array $data): SimpleXMLElement
     {
         $xml = new SimpleXMLElement('<Order xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Order_insbou003.xsd" />');
-        ArrayToSimplexml::convert($xml, StripEmptyElementsFromArray::from($data), stripNumericKeys: true);
+        ArrayToSimplexml::convert($xml, $data, stripNumericKeys: true);
         return $xml;
     }
 

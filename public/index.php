@@ -6,6 +6,7 @@ use Wefabric\MessageSender\RexelSender;
 use Wefabric\MessageSender\SolarSender;
 
 use Wefabric\SimplexmlToArray\SimplexmlToArray;
+use Wefabric\StripEmptyElementsFromArray\StripEmptyElementsFromArray;
 
 $RexelAlfana = RexelSender::make([
     'url' => 'https://test.messageservice.rexel.nl/MessageService31/MessageService.svc?wsdl',
@@ -45,6 +46,7 @@ function newMsgID() : string
 }
 
 $xml = simplexml_load_file('./order-test.xml')->asXML();
+//Convert to string, so we can do replacements. Not too pretty, but in the actual application the values are preinserted and do not need replacing.
 $xml = str_replace('%%BUYER_GLN%%', '8714231774051', $xml);
 $xml = str_replace('%%DELIVERYPARTY_GLN%%', '8714231774051', $xml);
 
@@ -59,8 +61,11 @@ if(! array_key_exists('a', $params)) {
         $post = $RexelAlfana->getPost();
         $xml = str_replace('%%SUPPLIER_GLN%%', '8713473009990', $xml);
         $xml = str_replace('%%ITEM_ID%%', '2700320341', $xml);
+        $xml = StripEmptyElementsFromArray::from(SimplexmlToArray::convert(new SimpleXMLElement($xml)));
+        //And now we parse everything back to a sendable array.
+
         $message = $RexelAlfana->getNewMessage(newMsgID())
-            ->setMsgContent($RexelAlfana->formatMessage(SimplexmlToArray::convert(new SimpleXMLElement($xml)))->asXML());
+            ->setMsgContent($RexelAlfana->formatMessage($xml)->asXML());
     }
     //dump($RexelAlfana);
 } else if($params['a'] == 'solar') {
@@ -71,8 +76,11 @@ if(! array_key_exists('a', $params)) {
         $post = $SolarAlfana->getPost();
         $xml = str_replace('%%SUPPLIER_GLN%%', '8711891990012', $xml);
         $xml = str_replace('%%ITEM_ID%%', '2301056', $xml);
+        $xml = StripEmptyElementsFromArray::from(SimplexmlToArray::convert(new SimpleXMLElement($xml)));
+        //And now we parse everything back to a sendable array.
+
         $message = $SolarAlfana->getNewMessage(newMsgID())
-            ->setMsgContent($SolarAlfana->formatMessage(SimplexmlToArray::convert(new SimpleXMLElement($xml)))->asXML());
+            ->setMsgContent($SolarAlfana->formatMessage($xml)->asXML());
     }
     //dump($SolarAlfana);
 } else {
