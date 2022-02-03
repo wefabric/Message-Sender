@@ -29,7 +29,8 @@
         "spatie/data-transfer-object": "^2.8",
         "wsdltophp/packagegenerator": "dev-master",
         "wefabric/array-to-simplexml": "*",
-        "wefabric/simplexml-to-array": "*"
+        "wefabric/simplexml-to-array": "*",
+        "wefabric/strip-empty-elements-from-array": "*"
     },
     "repositories": [
         {
@@ -39,6 +40,10 @@
         {
             "type": "vcs",
             "url": "https://github.com/wefabric/simplexml-to-array"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/wefabric/strip-empty-elements-from-array"
         }
     ]
 }

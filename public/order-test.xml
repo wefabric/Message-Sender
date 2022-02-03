@@ -5,8 +5,10 @@
     <OrderDate>2012-03-01</OrderDate>
     <OrderTime>05:10:10</OrderTime>
     <ScenarioTypeCode>X1</ScenarioTypeCode>
-    <DraftOrderIndicator>16</DraftOrderIndicator>
-    <DeliveryOnDemandIndicator>73E</DeliveryOnDemandIndicator>
+    <!-- DraftorderIndicator value 16 means consider this as a draft. Not usefull for testing with Rexel.-->
+    <DraftOrderIndicator></DraftOrderIndicator>
+    <!-- DeliveryOnDemandIndicator value 73E means only ship after receiving a signal from the customer. Not the default. -->
+    <DeliveryOnDemandIndicator></DeliveryOnDemandIndicator>
     <CustomerOrderReference>
         <EndCustomerOrderNumber>Eindafnemer001</EndCustomerOrderNumber>
     </CustomerOrderReference>
@@ -18,7 +20,8 @@
         <ProjectNumber>PROJ001</ProjectNumber>
     </ProjectReference>
     <DeliveryConditions>
-        <BackhaulingIndicator>4</BackhaulingIndicator>
+        <!-- BackhaulingIndicator 4 means customer will pick up, instead of default shipping to customer. -->
+        <BackhaulingIndicator></BackhaulingIndicator>
     </DeliveryConditions>
     <TransportInstruction>
         <TransportInstructionTypeCode>CRN</TransportInstructionTypeCode>
@@ -38,80 +41,80 @@
         </DeliveryTimeFrame>
     </DeliveryDateTimeInformation>
     <Buyer>
-        <ContactInformation>
-            <ContactPersonName>Pietje Puk</ContactPersonName>
-            <PhoneNumber>0031600000000</PhoneNumber>
-            <EmailAddress>noreply@donotmail.com</EmailAddress>
-        </ContactInformation>
-        <Name>Wefabric</Name>
-        <Name2> web &amp; marketing</Name2>
-        <StreetAndNumber>Iepenlaan 7</StreetAndNumber>
-        <City>Sneek</City>
-        <PostalCode>8603CE</PostalCode>
-        <Country>NL</Country>
-        <GLN>1234567890120</GLN>
+        <GLN>8714231774051</GLN>
+<!--        <Name>Wefabric</Name>-->
+<!--        <Name2> web &amp; marketing</Name2>-->
+<!--        <StreetAndNumber>Iepenlaan 7</StreetAndNumber>-->
+<!--        <City>Sneek</City>-->
+<!--        <PostalCode>8603CE</PostalCode>-->
+<!--        <Country>NL</Country>-->
+<!--        <ContactInformation>-->
+<!--            <ContactPersonName>Pietje Puk</ContactPersonName>-->
+<!--            <PhoneNumber>0031600000000</PhoneNumber>-->
+<!--            <EmailAddress>noreply@donotmail.com</EmailAddress>-->
+<!--        </ContactInformation>-->
     </Buyer>
     <Supplier>
-        <Name>Wefabric</Name>
-        <Name2> web &amp; marketing</Name2>
-        <StreetAndNumber>Iepenlaan 7a</StreetAndNumber>
-        <City>Sneek</City>
-        <PostalCode>8603CE</PostalCode>
-        <Country>NL</Country>
-        <GLN>1234567890121</GLN>
+        <GLN>8713473009990</GLN>
+<!--        <Name>Wefabric</Name>-->
+<!--        <Name2> web &amp; marketing</Name2>-->
+<!--        <StreetAndNumber>Iepenlaan 7a</StreetAndNumber>-->
+<!--        <City>Sneek</City>-->
+<!--        <PostalCode>8603CE</PostalCode>-->
+<!--        <Country>NL</Country>-->
     </Supplier>
     <DeliveryParty>
-        <LocationDescription>Can't miss it.</LocationDescription>
-        <ContactInformation>
-            <ContactPersonName>Pietje Puk</ContactPersonName>
-            <PhoneNumber>0600000000</PhoneNumber>
-        </ContactInformation>
-        <Name>Wefabric</Name>
-        <Name2> web &amp; marketing</Name2>
-        <StreetAndNumber>Iepenlaan 7b</StreetAndNumber>
-        <City>Sneek</City>
-        <PostalCode>8603CE</PostalCode>
+        <GLN>8714231774051</GLN>
+        <Name>Elektrobode</Name>
+<!--        <Name2>Elektrotechniek &amp; Elektronica onderdelen online</Name2>-->
+        <StreetAndNumber>Beatrixstraat 15</StreetAndNumber>
+        <City>Buitenpost</City>
+        <PostalCode>9285TV</PostalCode>
         <Country>NL</Country>
-        <GLN>1234567890122</GLN>
+<!--        <LocationDescription>Can't miss it.</LocationDescription>-->
+<!--        <ContactInformation>-->
+<!--            <ContactPersonName>Pietje Puk</ContactPersonName>-->
+<!--            <PhoneNumber>0600000000</PhoneNumber>-->
+<!--        </ContactInformation>-->
     </DeliveryParty>
     <Invoicee>
         <GLN>1234567890125</GLN>
     </Invoicee>
     <UltimateConsignee>
+        <GLN>1234567890123</GLN>
         <Name>Wefabric</Name>
         <Name2> web &amp; marketing</Name2>
         <StreetAndNumber>Iepenlaan 7c</StreetAndNumber>
         <City>Sneek</City>
         <PostalCode>8603CE</PostalCode>
         <Country>NL</Country>
-        <GLN>1234567890123</GLN>
     </UltimateConsignee>
     <ShipFrom>
+        <GLN>1234567890124</GLN>
         <Name>Wefabric</Name>
         <Name2> web &amp; marketing</Name2>
         <StreetAndNumber>Iepenlaan 7d</StreetAndNumber>
         <City>Sneek</City>
         <PostalCode>8603CE</PostalCode>
         <Country>NL</Country>
-        <GLN>1234567890124</GLN>
     </ShipFrom>
     <PurchasingOrganisation>
+        <GLN>1234567890126</GLN>
         <Name>Wefabric</Name>
         <Name2> web &amp; marketing</Name2>
         <StreetAndNumber>Iepenlaan 7e</StreetAndNumber>
         <City>Sneek</City>
         <PostalCode>8603CE</PostalCode>
         <Country>NL</Country>
-        <GLN>1234567890126</GLN>
     </PurchasingOrganisation>
     <Carrier>
+        <GLN>1234567890127</GLN>
         <Name>Wefabric</Name>
         <Name2> web &amp; marketing</Name2>
         <StreetAndNumber>Iepenlaan 7f</StreetAndNumber>
         <City>Sneek</City>
         <PostalCode>8603CE</PostalCode>
         <Country>NL</Country>
-        <GLN>1234567890127</GLN>
     </Carrier>
     <OrderLine>
         <LineNumber>1</LineNumber>
@@ -120,7 +123,7 @@
         <LineIdentification>1</LineIdentification>
         <TradeItemIdentification>
             <GTIN>12345678901211</GTIN>
-            <SuppliersTradeItemIdentification>idfk</SuppliersTradeItemIdentification>
+            <SuppliersTradeItemIdentification>2700320341</SuppliersTradeItemIdentification>
             <AdditionalItemIdentification>
                 <TradeItemDescription>Cookies</TradeItemDescription>
                 <Colour>Lightbrown</Colour>

@@ -4,6 +4,9 @@ require __DIR__.'/../vendor/autoload.php';
 
 use Wefabric\MessageSender\RexelSender;
 use Wefabric\MessageSender\SolarSender;
+
+use Wefabric\SimplexmlToArray\SimplexmlToArray;
+
 $RexelAlfana = RexelSender::make([
     'url' => 'https://test.messageservice.rexel.nl/MessageService31/MessageService.svc?wsdl',
     'relationID' => '', // = klantnummer
@@ -41,6 +44,8 @@ function newMsgID() : string
     return 'TEST_WFEB_' . md5(rand()); // = 4.
 }
 
+$xml = simplexml_load_file('./order-test.xml');
+
 $messageType = null;
 if(! array_key_exists('a', $params)) {
     dd('Geen geldige parameter \'?a=\' gevonden. Verwacht: tu,rexel,solar. ');
@@ -50,7 +55,6 @@ if(! array_key_exists('a', $params)) {
         $request = $RexelAlfana->getAvailableMessageRequest();
     } else {
         $post = $RexelAlfana->getPost();
-        $xml = simplexml_load_file('./order-RexelAlfana.xml');
         $message = $RexelAlfana->getNewMessage(newMsgID())
             ->setMsgContent($RexelAlfana->formatMessage(SimplexmlToArray::convert($xml))->asXML());
     }
@@ -61,7 +65,6 @@ if(! array_key_exists('a', $params)) {
         $request = $SolarAlfana->getAvailableMessageRequest();
     } else {
         $post = $SolarAlfana->getPost();
-        $xml = simplexml_load_file('./order-SolarAlfana.xml');
         $message = $SolarAlfana->getNewMessage(newMsgID())
             ->setMsgContent($SolarAlfana->formatMessage(SimplexmlToArray::convert($xml))->asXML());
     }
@@ -71,31 +74,19 @@ if(! array_key_exists('a', $params)) {
 }
 
 if(!$params['q'] || $params['q'] == 'post') {
+    dump('Message Request:');
+    dump(new SimpleXMLElement($message->getMsgContent()));
+
     if ($post->PostMessage($message)) {
         $response = $post->getResult()->getMessage()->getMsgContent();
         $orderResponseXML = simplexml_load_string($response);
 
+        dump('Response:');
         dump($response);
         dump($orderResponseXML);
     } else {
         dump($post);
-        dump($post->getResult());
         dump($post->getLastError());
-        $responseXML = new SimpleXMLElement('<error/>');
-        foreach($post->getLastError() as $key => $value){
-            $responseXML->addChild($key,$value);
-        }
-        dump($responseXML->asXML());
-
-
-//    /** @var SoapFault $value */
-//    foreach($post->getLastError() as $key => $value) {
-//        dump($key);
-//        dump($value);
-//        if( $value instanceof SoapFault) {
-//            dump($value->getMessage(), $value->faultcode);
-//        }
-//    }
     }
 
 } elseif ($params['q'] == 'get') {

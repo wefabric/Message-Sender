@@ -5,6 +5,7 @@ namespace Wefabric\MessageSender;
 use SimpleXMLElement;
 use Spatie\DataTransferObject\DataTransferObject;
 use Wefabric\ArrayToSimplexml\ArrayToSimplexml;
+use Wefabric\StripEmptyElementsFromArray\StripEmptyElementsFromArray;
 use WsdlToPhp\PackageBase\SoapClientInterface;
 
 abstract class MessageSender extends DataTransferObject
@@ -74,8 +75,144 @@ abstract class MessageSender extends DataTransferObject
     function formatMessage(array $data): SimpleXMLElement
     {
         $xml = new SimpleXMLElement('<Order xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Order_insbou003.xsd" />');
-        ArrayToSimplexml::convert($xml, $data, stripNumericKeys: true);
+        ArrayToSimplexml::convert($xml, StripEmptyElementsFromArray::from($data), stripNumericKeys: true);
         return $xml;
     }
+
+    // BELOW are the format functions that execute single edits to an INSBOU order message, that deviate from the official standard.
+
+    /**
+     * Function that applies a standard set of rules.
+     * @param array $data
+     * @return array
+     */
+    protected static function formatWithStandardRules(array $data): array
+    {
+        $data = self::removeValueFromParent($data, 'DeliveryParty', 'GLN');
+        $data = self::renameValueInsideParent($data, 'DeliveryParty', 'ContactInformation', 'Contactgegevens');
+
+        $data = self::renameOrderLineLineIdentificationToLineIdentiTfication($data);
+        $data = self::moveOrderlineAdditionalinformationFreeTextToOrderlineFreetext($data);
+
+        $data = self::replaceParentWithChild($data, 'CustomerOrderReference', 'EndCustomerOrderNumber');
+        $data = self::replaceParentWithChild($data, 'ProjectReference', 'ProjectNumber');
+        $data = self::replaceParentWithChild($data, 'DeliveryConditions', 'BackhaulingIndicator');
+        $data = self::replaceParentWithChild($data, 'AdditionalInformation', 'FreeText');
+
+        $data = self::removeValueFromRoot($data, 'UltimateConsignee');
+        $data = self::removeValueFromRoot($data, 'ShipFrom');
+
+        return $data;
+    }
+
+
+    /**
+     * Function to remove a value from the second level.
+     */
+    protected static function removeValueFromParent(array $data, string $parent, string $value): array
+    {
+        if(isset($data[$parent][$value])) {
+            unset($data[$parent][$value]);
+        }
+        return $data;
+    }
+
+    /**
+     * Function to remove a value from the rootlevel.
+     */
+    protected static function removeValueFromRoot(array $data, string $value): array
+    {
+        if(isset($data[$value])) {
+            unset($data[$value]);
+        }
+        return $data;
+    }
+
+    /**
+     * Function to rename a value inside an array, while keeping it at the same position.
+     */
+    protected static function renameValue(array $data, string $value, string $newValue): array
+    {
+        if(isset($data[$value])) {
+            $newData = [];
+            foreach($data as $key => $child) {
+                if($key === $value) {
+                    $key = $newValue;
+                }
+                $newData[$key] = $child;
+            }
+            return $newData;
+        }
+        return $data;
+    }
+
+    /**
+     * Function to rename a value inside a parent, while keeping it at the same position inside the parent.
+     */
+    protected static function renameValueInsideParent(array $data, string $parent, string $value, string $newValue): array
+    {
+        if(isset($data[$parent])) {
+            $data[$parent] = self::renameValue($data[$parent], $value, $newValue);
+        }
+        return $data;
+    }
+
+    /**
+     * Function to replace a parent with the specified child. The child essentially takes the place of the parent.
+     * $data[$a][$b] becomes $data[$b]
+     */
+    protected static function replaceParentWithChild(array $data, string $parent, string $value): array
+    {
+        $newData = [];
+        foreach($data as $key => $child){
+            if($key === $parent) {
+                $key = $value;
+                $child = $child[$value];
+            }
+            $newData[$key] = $child;
+        }
+        return $newData;
+    }
+
+    protected static function assertValueIsArray(array $data, string $value): array
+    {
+        foreach($data[$value] as $key => $child)  {
+            if(! is_numeric($key)) {
+                $data[$value] = [ $data[$value] ];
+            } //then we have only 1, not two in another array-level.
+            break;
+        }
+        return $data;
+    }
+
+    /**
+     * Renames Orderline > LineIdentification to LineIdentitfication. Note the extra T before fic...
+     */
+    protected static function renameOrderLineLineIdentificationToLineIdentitfication(array $data): array
+    {
+        $data = self::assertValueIsArray($data, 'OrderLine');
+
+        foreach($data['OrderLine'] as $i => $orderLine)  {
+            if(isset($orderLine['LineIdentification'])) {
+                $data['OrderLine'][$i] = self::renameValue($orderLine, 'LineIdentification', 'LineIdentitfication');
+            }
+        }
+
+        return $data;
+    }
+
+    protected static function moveOrderlineAdditionalinformationFreeTextToOrderlineFreetext(array $data): array
+    {
+        $data = self::assertValueIsArray($data, 'OrderLine');
+
+        foreach($data['OrderLine'] as $i => $orderLine) {
+            if(isset($orderLine['AdditionalInformation'])) {
+                $data['OrderLine'][$i] = self::replaceParentWithChild($orderLine, 'AdditionalInformation', 'FreeText');
+            }
+        }
+
+        return $data;
+    }
+
 
 }

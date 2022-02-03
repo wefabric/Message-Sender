@@ -100,31 +100,7 @@ class SolarSender extends MessageSender
      */
     public function formatMessage(array $data): SimpleXMLElement
     {
-        if(isset($data['DeliveryParty']['GLN'])) {
-            unset($data['DeliveryParty']['GLN']);
-        } // Remove GLN from DeliveryParty
-
-        if(isset($data['DeliveryParty']['LocationDescription'])) {
-            unset($data['DeliveryParty']['LocationDescription']);
-        } // Remove LocationDescription from DeliveryParty
-
-        if(isset($data['DeliveryParty']['ContactInformation'])) {
-            $data['DeliveryParty']['Contactgegevens'] = $data['DeliveryParty']['ContactInformation'];
-            unset($data['DeliveryParty']['ContactInformation']);
-        } // Rename DeliveryParty->ContactInformation to ContactInformation
-
-        foreach($data['OrderLine'] as $i => $orderLine)  {
-            if(isset($orderLine['LineIdentification'])) {
-                $newOrderLine = [];
-                foreach($orderLine as $key => $value){
-                    if($key === 'LineIdentification') {
-                        $key = 'LineIdentitfication';
-                    }
-                    $newOrderLine[$key] = $value;
-                }
-                $data['OrderLine'][$i] = $newOrderLine;
-            }
-        } // Rename Orderline->LineIdentification to LineIdentitfication
+        $data = parent::formatWithStandardRules($data);
 
         return parent::formatMessage($data);
     }
