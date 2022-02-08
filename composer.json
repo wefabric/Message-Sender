@@ -12,7 +12,8 @@
         "psr-4": {
             "Wefabric\\MessageSender\\": "src/",
             "Wefabric\\MessageSender\\MessageService31_Rexel\\": "MessageService31_Rexel/src/",
-            "Wefabric\\MessageSender\\MessageService31_Solar\\": "MessageService31_Solar/src/"
+            "Wefabric\\MessageSender\\MessageService31_Solar\\": "MessageService31_Solar/src/",
+            "Wefabric\\MessageSender\\MessageService31_TechnischeUnie\\": "MessageService31_TechnischeUnie/src/"
         }
     },
     "authors": [
