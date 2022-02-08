@@ -66,6 +66,7 @@ if(! array_key_exists('a', $params)) {
         $get = $TechnischeUnie->getGet();
         $request = $TechnischeUnie->getAvailableMessageRequest();
         $msgRequest = $TechnischeUnie->getMessageRequestType();
+        dd('delete');
     } else {
         $post = $TechnischeUnie->getPost();
         $xml = str_replace('%%SUPPLIER_GLN%%', '8711389000001', $xml);
@@ -82,6 +83,8 @@ if(! array_key_exists('a', $params)) {
         $get = $RexelAlfana->getGet();
         $request = $RexelAlfana->getAvailableMessageRequest();
         $msgRequest = $RexelAlfana->getMessageRequestType();
+
+        $delete = $RexelAlfana->getDelete();
     } else {
         $post = $RexelAlfana->getPost();
         $xml = str_replace('%%SUPPLIER_GLN%%', '8713473009990', $xml);
@@ -135,6 +138,7 @@ if(!$params['q'] || $params['q'] == 'post') {
 } elseif ($params['q'] == 'get') {
     if($get->GetAvailableMessages($request)) {
         if($messageList = $get->getResult()->getMessageList()) { //also checks if $messageList !== null
+            dump($get);
             foreach($messageList as $msgType) {
                 echo 'Message';
                 dump($msgType);

@@ -27,7 +27,7 @@ class Delete extends BaseService
      * @return Delete
      *@uses AbstractSoapClientBase::setSoapHeader()
      */
-    public function setSoapHeaderSecurity(Security $security, string $namespace = 'https://www.ketenstandaard.nl/WS/MessageService/3.1', bool $mustUnderstand = false, ?string $actor = null): self
+    public function setSoapHeaderSecurity(Security $security, string $namespace = BaseService::SecurityNS, bool $mustUnderstand = false, ?string $actor = null): self
     {
         return $this->setSoapHeader($namespace, 'Security', $security, $mustUnderstand, $actor);
     }

@@ -47,7 +47,7 @@ class RexelSender extends MessageSender
     public function getGet(): object
     {
         return (new Get($this->getHttpOptions()))
-//            ->setSoapHeaderSecurity($this->getSecurity())
+            ->setSoapHeaderSecurity($this->getSecurity())
             ->setSoapHeaderCustomInfo($this->getCustomInfo());
     }
 

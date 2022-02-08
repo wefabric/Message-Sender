@@ -6,6 +6,11 @@ namespace Wefabric\MessageSender\MessageService31_TechnischeUnie\ServiceType;
 
 use SoapFault;
 use Wefabric\MessageSender\BaseService\BaseService;
+use Wefabric\MessageSender\MessageService31_TechnischeUnie\StructType\AvailableMessagesRequestType;
+use Wefabric\MessageSender\MessageService31_TechnischeUnie\StructType\AvailableMessagesResponseType;
+use Wefabric\MessageSender\MessageService31_TechnischeUnie\StructType\CustomInfoType;
+use Wefabric\MessageSender\MessageService31_TechnischeUnie\StructType\MessageRequestResponseType;
+use Wefabric\MessageSender\MessageService31_TechnischeUnie\StructType\MessageRequestType;
 use Wefabric\MessageSender\MessageService31_TechnischeUnie\StructType\Security;
 use WsdlToPhp\PackageBase\AbstractSoapClientBase;
 
@@ -33,13 +38,13 @@ class Get extends AbstractSoapClientBase
     /**
      * Sets the CustomInfo SoapHeader param
      * @uses AbstractSoapClientBase::setSoapHeader()
-     * @param \Wefabric\MessageSender\MessageService31_TechnischeUnie\StructType\CustomInfoType $customInfo
+     * @param CustomInfoType $customInfo
      * @param string $namespace
      * @param bool $mustUnderstand
      * @param string $actor
-     * @return \Wefabric\MessageSender\MessageService31_TechnischeUnie\ServiceType\Get
+     * @return Get
      */
-    public function setSoapHeaderCustomInfo(\Wefabric\MessageSender\MessageService31_TechnischeUnie\StructType\CustomInfoType $customInfo, string $namespace = 'https://www.ketenstandaard.nl/WS/MessageService/3.1', bool $mustUnderstand = false, ?string $actor = null): self
+    public function setSoapHeaderCustomInfo(CustomInfoType $customInfo, string $namespace = 'https://www.ketenstandaard.nl/WS/MessageService/3.1', bool $mustUnderstand = false, ?string $actor = null): self
     {
         return $this->setSoapHeader($namespace, 'CustomInfo', $customInfo, $mustUnderstand, $actor);
     }
@@ -55,10 +60,10 @@ class Get extends AbstractSoapClientBase
      * @uses AbstractSoapClientBase::getSoapClient()
      * @uses AbstractSoapClientBase::setResult()
      * @uses AbstractSoapClientBase::saveLastError()
-     * @param \Wefabric\MessageSender\MessageService31_TechnischeUnie\StructType\AvailableMessagesRequestType $availableMessagesRequest
-     * @return \Wefabric\MessageSender\MessageService31_TechnischeUnie\StructType\AvailableMessagesResponseType|bool
+     * @param AvailableMessagesRequestType $availableMessagesRequest
+     * @return AvailableMessagesResponseType|bool
      */
-    public function GetAvailableMessages(\Wefabric\MessageSender\MessageService31_TechnischeUnie\StructType\AvailableMessagesRequestType $availableMessagesRequest)
+    public function GetAvailableMessages(AvailableMessagesRequestType $availableMessagesRequest)
     {
         try {
             $this->setResult($resultGetAvailableMessages = $this->getSoapClient()->__soapCall('GetAvailableMessages', [
@@ -85,10 +90,10 @@ class Get extends AbstractSoapClientBase
      * @uses AbstractSoapClientBase::getSoapClient()
      * @uses AbstractSoapClientBase::setResult()
      * @uses AbstractSoapClientBase::saveLastError()
-     * @param \Wefabric\MessageSender\MessageService31_TechnischeUnie\StructType\MessageRequestType $messageRequest
-     * @return \Wefabric\MessageSender\MessageService31_TechnischeUnie\StructType\MessageRequestResponseType|bool
+     * @param MessageRequestType $messageRequest
+     * @return MessageRequestResponseType|bool
      */
-    public function GetMessage(\Wefabric\MessageSender\MessageService31_TechnischeUnie\StructType\MessageRequestType $messageRequest)
+    public function GetMessage(MessageRequestType $messageRequest)
     {
         try {
             $this->setResult($resultGetMessage = $this->getSoapClient()->__soapCall('GetMessage', [
@@ -104,8 +109,8 @@ class Get extends AbstractSoapClientBase
     }
     /**
      * Returns the result
-     * @see AbstractSoapClientBase::getResult()
-     * @return \Wefabric\MessageSender\MessageService31_TechnischeUnie\StructType\AvailableMessagesResponseType|\Wefabric\MessageSender\MessageService31_TechnischeUnie\StructType\MessageRequestResponseType
+     * @return AvailableMessagesResponseType|MessageRequestResponseType
+     *@see AbstractSoapClientBase::getResult()
      */
     public function getResult()
     {
