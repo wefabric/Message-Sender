@@ -5,17 +5,22 @@ namespace Wefabric\MessageSender;
 use DateTime;
 use DateTimeInterface;
 use SimpleXMLElement;
-use Wefabric\MessageSender\MessageService31_Rexel\ServiceType\Get;
-use Wefabric\MessageSender\MessageService31_Rexel\StructType\AvailableMessagesRequestType;
 use WsdlToPhp\PackageBase\SoapClientInterface;
 
+use Wefabric\MessageSender\MessageService31_Rexel\ServiceType\Get;
+use Wefabric\MessageSender\MessageService31_Rexel\StructType\AvailableMessagesRequestType;
+use Wefabric\MessageSender\MessageService31_Rexel\StructType\MessageRequestType;
+use Wefabric\MessageSender\MessageService31_Rexel\ServiceType\Delete;
+
 use Wefabric\MessageSender\MessageService31_Rexel\ServiceType\Post;
+use Wefabric\MessageSender\MessageService31_Rexel\StructType\MessageList;
+use Wefabric\MessageSender\MessageService31_Rexel\StructType\MessageType;
+
+use Wefabric\MessageSender\MessageService31_Rexel\StructType\CustomInfoType;
 use Wefabric\MessageSender\MessageService31_Rexel\StructType\Security;
 use Wefabric\MessageSender\MessageService31_Rexel\StructType\Timestamp;
 use Wefabric\MessageSender\MessageService31_Rexel\StructType\UsernameToken;
-use Wefabric\MessageSender\MessageService31_Rexel\StructType\CustomInfoType;
-use Wefabric\MessageSender\MessageService31_Rexel\StructType\MessageList;
-use Wefabric\MessageSender\MessageService31_Rexel\StructType\MessageType;
+
 
 class RexelSender extends MessageSender
 {
@@ -42,6 +47,13 @@ class RexelSender extends MessageSender
     public function getGet(): object
     {
         return (new Get($this->getHttpOptions()))
+//            ->setSoapHeaderSecurity($this->getSecurity())
+            ->setSoapHeaderCustomInfo($this->getCustomInfo());
+    }
+
+    function getDelete(): Delete
+    {
+        return (new Delete($this->getHttpOptions()))
             ->setSoapHeaderSecurity($this->getSecurity())
             ->setSoapHeaderCustomInfo($this->getCustomInfo());
     }
@@ -90,6 +102,11 @@ class RexelSender extends MessageSender
     public function getAvailableMessageRequest(): AvailableMessagesRequestType
     {
         return new AvailableMessagesRequestType(''); //empty: don't filter on type.
+    }
+
+    function getMessageRequestType(?string $msgId = null, ?string $msgFormat = null, ?string $msgVersion = null): MessageRequestType
+    {
+        return new MessageRequestType($msgId, $msgFormat, $msgVersion);
     }
 
     /**

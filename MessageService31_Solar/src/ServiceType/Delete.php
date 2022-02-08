@@ -5,6 +5,10 @@ declare(strict_types=1);
 namespace Wefabric\MessageSender\MessageService31_Solar\ServiceType;
 
 use SoapFault;
+use Wefabric\MessageSender\MessageService31_Solar\StructType\CustomInfoType;
+use Wefabric\MessageSender\MessageService31_Solar\StructType\MessageRequestType;
+use Wefabric\MessageSender\MessageService31_Solar\StructType\MessageResponseType;
+use Wefabric\MessageSender\MessageService31_Solar\StructType\Security;
 use WsdlToPhp\PackageBase\AbstractSoapClientBase;
 use Wefabric\MessageSender\BaseService\BaseService;
 
@@ -14,16 +18,31 @@ use Wefabric\MessageSender\BaseService\BaseService;
  */
 class Delete extends BaseService
 {
+
     /**
-     * Sets the CustomInfo SoapHeader param
-     * @uses AbstractSoapClientBase::setSoapHeader()
-     * @param \Wefabric\MessageSender\MessageService31_Solar\StructType\CustomInfoType $customInfo
+     * Sets the Security SoapHeader param
+     * @param Security $security
      * @param string $namespace
      * @param bool $mustUnderstand
      * @param string $actor
-     * @return \Wefabric\MessageSender\MessageService31_Solar\ServiceType\Delete
+     * @return Post
+     *@uses AbstractSoapClientBase::setSoapHeader()
      */
-    public function setSoapHeaderCustomInfo(\Wefabric\MessageSender\MessageService31_Solar\StructType\CustomInfoType $customInfo, string $namespace = 'https://www.ketenstandaard.nl/WS/MessageService/3.1', bool $mustUnderstand = false, ?string $actor = null): self
+    public function setSoapHeaderSecurity(Security $security, string $namespace = BaseService::SecurityNS, bool $mustUnderstand = false, ?string $actor = null): self
+    {
+        return $this->setSoapHeader($namespace, 'Security', $security, $mustUnderstand, $actor);
+    }
+
+    /**
+     * Sets the CustomInfo SoapHeader param
+     * @uses AbstractSoapClientBase::setSoapHeader()
+     * @param CustomInfoType $customInfo
+     * @param string $namespace
+     * @param bool $mustUnderstand
+     * @param string $actor
+     * @return Delete
+     */
+    public function setSoapHeaderCustomInfo(CustomInfoType $customInfo, string $namespace = 'https://www.ketenstandaard.nl/WS/MessageService/3.1', bool $mustUnderstand = false, ?string $actor = null): self
     {
         return $this->setSoapHeader($namespace, 'CustomInfo', $customInfo, $mustUnderstand, $actor);
     }
@@ -39,10 +58,10 @@ class Delete extends BaseService
      * @uses AbstractSoapClientBase::getSoapClient()
      * @uses AbstractSoapClientBase::setResult()
      * @uses AbstractSoapClientBase::saveLastError()
-     * @param \Wefabric\MessageSender\MessageService31_Solar\StructType\MessageRequestType $messageRequest
-     * @return \Wefabric\MessageSender\MessageService31_Solar\StructType\MessageResponseType|bool
+     * @param MessageRequestType $messageRequest
+     * @return MessageResponseType|bool
      */
-    public function DeleteMessage(\Wefabric\MessageSender\MessageService31_Solar\StructType\MessageRequestType $messageRequest)
+    public function DeleteMessage(MessageRequestType $messageRequest)
     {
         try {
             $this->setResult($resultDeleteMessage = $this->getSoapClient()->__soapCall('DeleteMessage', [
@@ -59,7 +78,7 @@ class Delete extends BaseService
     /**
      * Returns the result
      * @see AbstractSoapClientBase::getResult()
-     * @return \Wefabric\MessageSender\MessageService31_Solar\StructType\MessageResponseType
+     * @return MessageResponseType
      */
     public function getResult()
     {

@@ -20,7 +20,7 @@ abstract class MessageSender extends DataTransferObject
     protected ?string $languageCode = 'NL';
     protected bool $isContentCompressed = false;
     protected string $applicationID = 'Elektrobode';
-    protected string $versionID = '';
+    protected string $versionID = '9.4';
 
     // for MessageProperties :
     protected string $msgFormat = 'INSBOU';

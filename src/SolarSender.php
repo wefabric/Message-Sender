@@ -5,15 +5,18 @@ namespace Wefabric\MessageSender;
 use DateTime;
 use DateTimeInterface;
 use SimpleXMLElement;
-use Wefabric\MessageSender\MessageService31_Solar\ServiceType\Get;
-use Wefabric\MessageSender\MessageService31_Solar\StructType\AvailableMessagesRequestType;
 use WsdlToPhp\PackageBase\SoapClientInterface;
 
+use Wefabric\MessageSender\MessageService31_Solar\ServiceType\Get;
+use Wefabric\MessageSender\MessageService31_Solar\StructType\AvailableMessagesRequestType;
+use Wefabric\MessageSender\MessageService31_Solar\StructType\MessageRequestType;
+use Wefabric\MessageSender\MessageService31_Solar\ServiceType\Delete;
+
 use Wefabric\MessageSender\MessageService31_Solar\ServiceType\Post;
-use Wefabric\MessageSender\MessageService31_Solar\StructType\CustomInfoType;
 use Wefabric\MessageSender\MessageService31_Solar\StructType\MessagePropertiesType;
 use Wefabric\MessageSender\MessageService31_Solar\StructType\MessageType;
 
+use Wefabric\MessageSender\MessageService31_Solar\StructType\CustomInfoType;
 use Wefabric\MessageSender\MessageService31_Solar\StructType\Security;
 use Wefabric\MessageSender\MessageService31_Solar\StructType\Timestamp;
 use Wefabric\MessageSender\MessageService31_Solar\StructType\UsernameToken;
@@ -47,6 +50,13 @@ class SolarSender extends MessageSender
             ->setSoapHeaderCustomInfo($this->getCustomInfo());
     }
 
+    function getDelete(): Delete
+    {
+        return (new Delete($this->getHttpOptions()))
+            ->setSoapHeaderSecurity($this->getSecurity())
+            ->setSoapHeaderCustomInfo($this->getCustomInfo());
+    }
+
     /**
      * @return array
      */
@@ -75,10 +85,25 @@ class SolarSender extends MessageSender
         return new MessageType(msgContent: '', msgProperties: new MessagePropertiesType((new DateTime())->format(DateTimeInterface::RFC3339), $msgID, $this->msgFormat, $this->msgVersion, $this->msgType));
     }
 
+    /**
+     * @return AvailableMessagesRequestType
+     */
     function getAvailableMessageRequest(): AvailableMessagesRequestType
     {
         return new AvailableMessagesRequestType(''); //empty: don't filter on type.
     }
+
+    /**
+     * @param string|null $msgId
+     * @param string|null $msgFormat
+     * @param string|null $msgVersion
+     * @return MessageRequestType
+     */
+    function getMessageRequestType(?string $msgId = null, ?string $msgFormat = null, ?string $msgVersion = null): MessageRequestType
+    {
+        return new MessageRequestType($msgId, $msgFormat, $msgVersion);
+    }
+
 
     /**
      * @param bool $includeTimestamp

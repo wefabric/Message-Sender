@@ -4,9 +4,17 @@ require __DIR__.'/../vendor/autoload.php';
 
 use Wefabric\MessageSender\RexelSender;
 use Wefabric\MessageSender\SolarSender;
+use Wefabric\MessageSender\TechnischeUnieSender;
 
 use Wefabric\SimplexmlToArray\SimplexmlToArray;
 use Wefabric\StripEmptyElementsFromArray\StripEmptyElementsFromArray;
+
+$TechnischeUnie = TechnischeUnieSender::make([
+    'url' => 'https://testservices.technischeunie.com/WebServices/ExterneBerichtUitwisselingService31/messageservice.svc?signlewsdl',
+    'relationID' => '',
+    'inlogCode' => '',
+    'password' => ''
+]);
 
 $RexelAlfana = RexelSender::make([
     'url' => 'https://test.messageservice.rexel.nl/MessageService31/MessageService.svc?wsdl',
@@ -53,10 +61,27 @@ $xml = str_replace('%%DELIVERYPARTY_GLN%%', '8714231774051', $xml);
 $messageType = null;
 if(! array_key_exists('a', $params)) {
     dd('Geen geldige parameter \'?a=\' gevonden. Verwacht: tu,rexel,solar. ');
+} else if($params['a'] == 'tu') {
+    if($params['q'] == 'get') {
+        $get = $TechnischeUnie->getGet();
+        $request = $TechnischeUnie->getAvailableMessageRequest();
+        $msgRequest = $TechnischeUnie->getMessageRequestType();
+    } else {
+        $post = $TechnischeUnie->getPost();
+        $xml = str_replace('%%SUPPLIER_GLN%%', '8711389000001', $xml);
+        $xml = str_replace('%%ITEM_ID%%', '7703960', $xml);
+        $xml = StripEmptyElementsFromArray::from(SimplexmlToArray::convert(new SimpleXMLElement($xml)));
+        //And now we parse everything back to a sendable array.
+
+        $message = $TechnischeUnie->getNewMessage(newMsgID())
+            ->setMsgContent($TechnischeUnie->formatMessage($xml)->asXML());
+    }
+    dump($TechnischeUnie);
 } else if($params['a'] == 'rexel') {
     if($params['q'] == 'get') {
         $get = $RexelAlfana->getGet();
         $request = $RexelAlfana->getAvailableMessageRequest();
+        $msgRequest = $RexelAlfana->getMessageRequestType();
     } else {
         $post = $RexelAlfana->getPost();
         $xml = str_replace('%%SUPPLIER_GLN%%', '8713473009990', $xml);
@@ -72,6 +97,9 @@ if(! array_key_exists('a', $params)) {
     if($params['q'] == 'get') {
         $get = $SolarAlfana->getGet();
         $request = $SolarAlfana->getAvailableMessageRequest();
+        $msgRequest = $SolarAlfana->getMessageRequestType();
+
+        $delete = $SolarAlfana->getDelete();
     } else {
         $post = $SolarAlfana->getPost();
         $xml = str_replace('%%SUPPLIER_GLN%%', '8711891990012', $xml);
@@ -84,7 +112,7 @@ if(! array_key_exists('a', $params)) {
     }
     //dump($SolarAlfana);
 } else {
-    dd('Geen geldige parameter \'?a=\' gevonden. Verwacht: rexel,solar. Gekregen: \'' . $params['a'] . '\'');
+    dd('Geen geldige parameter \'?a=\' gevonden. Verwacht: tu,rexel,solar. Gekregen: \'' . $params['a'] . '\'');
 }
 
 if(!$params['q'] || $params['q'] == 'post') {
@@ -96,6 +124,7 @@ if(!$params['q'] || $params['q'] == 'post') {
         $orderResponseXML = simplexml_load_string($response);
 
         dump('Response:');
+        dump($post);
         dump($response);
         dump($orderResponseXML);
     } else {
@@ -105,12 +134,21 @@ if(!$params['q'] || $params['q'] == 'post') {
 
 } elseif ($params['q'] == 'get') {
     if($get->GetAvailableMessages($request)) {
-        dump($get);
         if($messageList = $get->getResult()->getMessageList()) { //also checks if $messageList !== null
-            dump($messageList);
+            foreach($messageList as $msgType) {
+                echo 'Message';
+                dump($msgType);
 
-            foreach($messageList as $message) {
-                dump($message);
+                $msgRequest->setMsgId($msgType->getMsgId())
+                    ->setMsgFormat($msgType->getMsgFormat())
+                    ->setMsgVersion($msgType->getMsgVersion());
+                dump($msgRequest);
+
+                if($message = $get->GetMessage($msgRequest)) {
+                    dump($message);
+                    //$delete->DeleteMessage($msgRequest);
+                    dd($delete);
+                }
             }
         }
     } else {
