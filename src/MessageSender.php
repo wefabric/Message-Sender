@@ -10,10 +10,10 @@ use WsdlToPhp\PackageBase\SoapClientInterface;
 
 abstract class MessageSender extends DataTransferObject
 {
-    public string $url;
-    public string $relationID;
-    public string $inlogCode;
-    public string $password;
+    public string $url = '';
+    public string $relationID = '';
+    public string $inlogCode = '';
+    public string $password = '';
 
     // for CustomInfo :
     protected bool $isTestMessage = false;
