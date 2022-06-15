@@ -75,6 +75,8 @@ if(! array_key_exists('a', $params)) {
         $post = $TechnischeUnie->getPost();
         $xml = str_replace('%%SUPPLIER_GLN%%', '8711389000001', $xml);
         $xml = str_replace('%%ITEM_ID%%', '7703960', $xml);
+        $xml = str_replace('%%DELIVERYPARTY_LOCATIONDESCRIPTION%%', '', $xml);
+
         $xml = StripEmptyElementsFromArray::from(SimplexmlToArray::convert(new SimpleXMLElement($xml)));
         //And now we parse everything back to a sendable array.
 
@@ -93,6 +95,8 @@ if(! array_key_exists('a', $params)) {
         $post = $RexelAlfana->getPost();
         $xml = str_replace('%%SUPPLIER_GLN%%', '8713473009990', $xml);
         $xml = str_replace('%%ITEM_ID%%', '2700320341', $xml);
+        $xml = str_replace('%%DELIVERYPARTY_LOCATIONDESCRIPTION%%', '', $xml);
+
         $xml = StripEmptyElementsFromArray::from(SimplexmlToArray::convert(new SimpleXMLElement($xml)));
         //And now we parse everything back to a sendable array.
 
@@ -111,6 +115,8 @@ if(! array_key_exists('a', $params)) {
         $post = $SolarAlfana->getPost();
         $xml = str_replace('%%SUPPLIER_GLN%%', '8711891990012', $xml);
         $xml = str_replace('%%ITEM_ID%%', '2301056', $xml);
+        $xml = str_replace('%%DELIVERYPARTY_LOCATIONDESCRIPTION%%', '001', $xml);
+
         $xml = StripEmptyElementsFromArray::from(SimplexmlToArray::convert(new SimpleXMLElement($xml)));
         //And now we parse everything back to a sendable array.
 
