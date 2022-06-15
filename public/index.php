@@ -2,6 +2,7 @@
 
 require __DIR__.'/../vendor/autoload.php';
 
+use Wefabric\MessageSender\BaseService\SoapFaultException;
 use Wefabric\MessageSender\RexelSender;
 use Wefabric\MessageSender\SolarSender;
 use Wefabric\MessageSender\TechnischeUnieSender;
@@ -47,6 +48,7 @@ die();
 
 $params = [];
 parse_str(parse_url($_SERVER['REQUEST_URI'])['query'], $params);
+if(! array_key_exists('q', $params)) { $params['q'] = null; } //set empty value, default = 'post'
 
 function newMsgID() : string
 {
@@ -133,6 +135,9 @@ if(!$params['q'] || $params['q'] == 'post') {
     } else {
         dump($post);
         dump($post->getLastError());
+        dump($post->getLastErrorAsArray());
+        dump($post->getLastErrorAsXML());
+        dump($post->getLastErrorAsXML()->asXML());
     }
 
 } elseif ($params['q'] == 'get') {

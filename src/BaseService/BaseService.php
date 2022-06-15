@@ -46,4 +46,15 @@ class BaseService extends AbstractSoapClientBase
 
         return $this;
     }
+
+    public function getLastErrorAsArray(): array
+    {
+        return SoapFaultException::toArray(parent::getLastError());
+    }
+
+    public function getLastErrorAsXML(): \SimpleXMLElement
+    {
+        return SoapFaultException::toXML(parent::getLastError());
+    }
+
 }
