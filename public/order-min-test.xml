@@ -2,17 +2,31 @@
 <Order xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Order_insbou003.xsd">
     <OrderType>220</OrderType>
     <OrderNumber>ORD001</OrderNumber>
-    <OrderDate>2012-03-01</OrderDate>
+    <OrderDate>2022-06-01</OrderDate>
     <OrderTime>05:10:10</OrderTime>
     <Buyer>
-        <GLN>1234567890120</GLN>
+        <GLN>%%BUYER_GLN%%</GLN>
     </Buyer>
     <Supplier>
-        <GLN>1234567890121</GLN>
+        <GLN>%%SUPPLIER_GLN%%</GLN>
     </Supplier>
+    <DeliveryParty>
+        <GLN>%%DELIVERYPARTY_GLN%%</GLN>
+        <Name>Elektrobode</Name>
+        <StreetAndNumber>Beatrixstraat 15</StreetAndNumber>
+        <City>Buitenpost</City>
+        <PostalCode>9285TV</PostalCode>
+        <Country>NL</Country>
+    </DeliveryParty>
     <OrderLine>
         <LineNumber>1</LineNumber>
         <OrderedQuantity>10</OrderedQuantity>
         <LineIdentification>1</LineIdentification>
+        <TradeItemIdentification>
+            <SuppliersTradeItemIdentification>%%ITEM_ID%%</SuppliersTradeItemIdentification>
+            <AdditionalItemIdentification>
+                <TradeItemDescription>Cookies</TradeItemDescription>
+            </AdditionalItemIdentification>
+        </TradeItemIdentification>
     </OrderLine>
 </Order>
