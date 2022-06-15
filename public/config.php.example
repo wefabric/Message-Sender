@@ -1,0 +1,14 @@
+<?php
+
+return [
+    'TU_RELATIONID' => '',
+    'TU_INLOGCODE' => '',
+    'TU_PASSWORD' => '',
+
+    'REXEL_RELATIONID' => '',
+    'REXEL_INLOGCODE' => '',
+    'REXEL_PASSWORD' => '',
+
+    'SOLAR_INLOGCODE' => '',
+    'SOLAR_PASSWORD' => '',
+];

@@ -10,25 +10,27 @@ use Wefabric\MessageSender\TechnischeUnieSender;
 use Wefabric\SimplexmlToArray\SimplexmlToArray;
 use Wefabric\StripEmptyElementsFromArray\StripEmptyElementsFromArray;
 
+$config = require_once('config.php');
+
 $TechnischeUnie = TechnischeUnieSender::make([
     'url' => 'https://testservices.technischeunie.com/WebServices/ExterneBerichtUitwisselingService31/messageservice.svc?signlewsdl',
-    'relationID' => '',
-    'inlogCode' => '',
-    'password' => ''
+    'relationID' => $config['TU_RELATIONID'],
+    'inlogCode' => $config['TU_INLOGCODE'],
+    'password' => $config['TU_PASSWORD'],
 ]);
 
 $RexelAlfana = RexelSender::make([
     'url' => 'https://test.messageservice.rexel.nl/MessageService31/MessageService.svc?wsdl',
-    'relationID' => '', // = klantnummer
-    'inlogCode' => '',
-    'password' => ''
+    'relationID' => $config['REXEL_RELATIONID'], // = klantnummer
+    'inlogCode' => $config['REXEL_INLOGCODE'],
+    'password' => $config['REXEL_PASSWORD']
 ]);
 
 $SolarAlfana = SolarSender::make([
     'url' => 'https://api.solarnederland.online/dico/tst2/31?wsdl',
     'relationID' => '', // is empty
-    'inlogCode' => '',
-    'password' => ''
+    'inlogCode' => $config['SOLAR_INLOGCODE'],
+    'password' => $config['SOLAR_PASSWORD']
 ]);
 
 /**
