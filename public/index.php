@@ -13,7 +13,7 @@ use Wefabric\StripEmptyElementsFromArray\StripEmptyElementsFromArray;
 $config = require_once('config.php');
 
 $TechnischeUnie = TechnischeUnieSender::make([
-    'url' => 'https://testservices.technischeunie.com/WebServices/ExterneBerichtUitwisselingService31/messageservice.svc?signlewsdl',
+    'url' => 'https://testservices.technischeunie.com/WebServices/ExterneBerichtUitwisselingService31/messageservice.svc?singlewsdl',
     'relationID' => $config['TU_RELATIONID'],
     'inlogCode' => $config['TU_INLOGCODE'],
     'password' => $config['TU_PASSWORD'],
@@ -39,10 +39,10 @@ use WsdlToPhp\PackageGenerator\Generator\Generator;
 
 // Options definition: the configuration file parameter is optional
 $options = (GeneratorOptions::instance())
-    ->setOrigin($SolarAlfana->url)
-    ->setDestination('../MessageService31_Solar')
-    ->setComposerName('Wefabric\MessageSender\MessageService31_Solar')
-    ->setNameSpace('Wefabric\MessageSender\MessageService31_Solar');
+    ->setOrigin($TechnischeUnie->url)
+    ->setDestination('../MessageService31_TechnischeUnie')
+    ->setComposerName('Wefabric\MessageSender\MessageService31_TechnischeUnie')
+    ->setNameSpace('Wefabric\MessageSender\MessageService31_TechnischeUnie');
 $generator = new Generator($options);
 $generator->generatePackage();
 die();
@@ -74,7 +74,7 @@ if(! array_key_exists('a', $params)) {
     } else {
         $post = $TechnischeUnie->getPost();
         $xml = str_replace('%%SUPPLIER_GLN%%', '8711389000001', $xml);
-        $xml = str_replace('%%ITEM_ID%%', '7703960', $xml);
+        $xml = str_replace('%%ITEM_ID%%', '0521617', $xml);
         $xml = str_replace('%%DELIVERYPARTY_LOCATIONDESCRIPTION%%', '', $xml);
 
         $xml = StripEmptyElementsFromArray::from(SimplexmlToArray::convert(new SimpleXMLElement($xml)));
