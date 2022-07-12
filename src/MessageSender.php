@@ -5,7 +5,6 @@ namespace Wefabric\MessageSender;
 use SimpleXMLElement;
 use Spatie\DataTransferObject\DataTransferObject;
 use Wefabric\ArrayToSimplexml\ArrayToSimplexml;
-use Wefabric\StripEmptyElementsFromArray\StripEmptyElementsFromArray;
 use WsdlToPhp\PackageBase\SoapClientInterface;
 
 abstract class MessageSender extends DataTransferObject
@@ -44,6 +43,23 @@ abstract class MessageSender extends DataTransferObject
      * Use: $response = $get->GetAvailableMessages($request);
      */
     abstract function getGet(): object;
+
+    /**
+     * @return object A complete Delete-object to use and delete data at the set URL and credentials.
+     * Use: $response = $delete-> ??
+     */
+    abstract function getDelete(): object;
+
+    /**
+     * @param bool $includeTimestamp
+     * @return object
+     */
+    abstract function getSecurity(bool $includeTimestamp = false): object;
+
+    /**
+     * @return object
+     */
+    abstract function getCustomInfo(): object;
 
     /**
      * @return array

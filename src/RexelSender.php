@@ -72,7 +72,7 @@ class RexelSender extends MessageSender
     /**
      * @return Security
      */
-    function getSecurity(): Security
+    function getSecurity(bool $includeTimestamp = false): Security
     {
         $format = 'Y-m-d\T\0\0\:\0\0\:\0\0\Z'; //try to force time at 00:00Z
         //$format = DateTimeInterface::RFC3339;
