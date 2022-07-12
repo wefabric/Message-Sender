@@ -133,13 +133,20 @@ if(!$params['q'] || $params['q'] == 'post') {
     dump(new SimpleXMLElement($message->getMsgContent()));
 
     if ($post->PostMessage($message)) {
-        $response = $post->getResult()->getMessage()->getMsgContent();
-        $orderResponseXML = simplexml_load_string($response);
+        $result = $post->getResult();
+        if($result->getMessage()) {
+            $response = $result->getMessage()->getMsgContent();
+            $orderResponseXML = simplexml_load_string($response);
+        }
 
         dump('Response:');
         dump($post);
-        dump($response);
-        dump($orderResponseXML);
+        if(isset($response)) {
+            dump($response);
+            dump($orderResponseXML);
+        } else {
+            dump($result);
+        }
     } else {
         dump($post);
         dump($post->getLastError());
