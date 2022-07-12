@@ -4,6 +4,7 @@ namespace Wefabric\MessageSender;
 
 use DateTime;
 use DateTimeInterface;
+use SimpleXMLElement;
 use SoapHeader;
 use SoapVar;
 use Wefabric\MessageSender\BaseService\BaseService;
@@ -124,4 +125,16 @@ class TechnischeUnieSender extends MessageSender
     {
         return new CustomInfo($this->isTestMessage, $this->languageCode, $this->isContentCompressed, $this->applicationID, $this->versionID, $this->relationID);
     }
+
+    /**
+     * @param array $data
+     * @return SimpleXMLElement
+     */
+    public function formatMessage(array $data): SimpleXMLElement
+    {
+        $data = parent::formatWithStandardRules($data);
+
+        return parent::formatMessage($data);
+    }
+
 }
