@@ -84,6 +84,8 @@ abstract class MessageSender extends DataTransferObject
      */
     abstract function getAvailableMessageRequest(): object;
 
+    abstract function getMessageRequestType(?string $msgId = null, ?string $msgFormat = null, ?string $msgVersion = null): object;
+
     /**
      * @param array $data
      * @return SimpleXMLElement

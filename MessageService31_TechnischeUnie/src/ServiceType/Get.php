@@ -5,27 +5,50 @@ declare(strict_types=1);
 namespace Wefabric\MessageSender\MessageService31_TechnischeUnie\ServiceType;
 
 use SoapFault;
+use Wefabric\MessageSender\BaseService\BaseService;
+use Wefabric\MessageSender\MessageService31_TechnischeUnie\StructType\AvailableMessagesRequest;
+use Wefabric\MessageSender\MessageService31_TechnischeUnie\StructType\AvailableMessagesResponse;
+use Wefabric\MessageSender\MessageService31_TechnischeUnie\StructType\CustomInfo;
+use Wefabric\MessageSender\MessageService31_TechnischeUnie\StructType\MessageRequest;
+use Wefabric\MessageSender\MessageService31_TechnischeUnie\StructType\MessageRequestResponse;
+use Wefabric\MessageSender\MessageService31_TechnischeUnie\StructType\Security;
 use WsdlToPhp\PackageBase\AbstractSoapClientBase;
 
 /**
  * This class stands for Get ServiceType
  * @subpackage Services
  */
-class Get extends AbstractSoapClientBase
+class Get extends BaseService
 {
+
+    /**
+     * Sets the Security SoapHeader param
+     * @param Security $security
+     * @param string $namespace
+     * @param bool $mustUnderstand
+     * @param ?string $actor
+     * @return Get
+     *@uses AbstractSoapClientBase::setSoapHeader()
+     */
+    public function setSoapHeaderSecurity(Security|array $security, string $namespace = BaseService::SecurityNS, bool $mustUnderstand = false, ?string $actor = null): self
+    {
+        return $this->setSoapHeader($namespace, 'Security', $security, $mustUnderstand, $actor);
+    }
+
     /**
      * Sets the CustomInfo SoapHeader param
      * @uses AbstractSoapClientBase::setSoapHeader()
-     * @param \Wefabric\MessageSender\MessageService31_TechnischeUnie\StructType\CustomInfo $customInfo
+     * @param CustomInfo $customInfo
      * @param string $namespace
      * @param bool $mustUnderstand
-     * @param string $actor
-     * @return \Wefabric\MessageSender\MessageService31_TechnischeUnie\ServiceType\Get
+     * @param ?string $actor
+     * @return Get
      */
-    public function setSoapHeaderCustomInfo(\Wefabric\MessageSender\MessageService31_TechnischeUnie\StructType\CustomInfo $customInfo, string $namespace = 'https://www.ketenstandaard.nl/WS/MessageService/3.1', bool $mustUnderstand = false, ?string $actor = null): self
+    public function setSoapHeaderCustomInfo(CustomInfo $customInfo, string $namespace = 'https://www.ketenstandaard.nl/WS/MessageService/3.1', bool $mustUnderstand = false, ?string $actor = null): self
     {
         return $this->setSoapHeader($namespace, 'CustomInfo', $customInfo, $mustUnderstand, $actor);
     }
+
     /**
      * Method to call the operation originally named GetMessage
      * Meta information extracted from the WSDL
@@ -36,10 +59,10 @@ class Get extends AbstractSoapClientBase
      * @uses AbstractSoapClientBase::getSoapClient()
      * @uses AbstractSoapClientBase::setResult()
      * @uses AbstractSoapClientBase::saveLastError()
-     * @param \Wefabric\MessageSender\MessageService31_TechnischeUnie\StructType\MessageRequest $parameters
-     * @return \Wefabric\MessageSender\MessageService31_TechnischeUnie\StructType\MessageRequestResponse|bool
+     * @param MessageRequest $parameters
+     * @return MessageRequestResponse|bool
      */
-    public function GetMessage(\Wefabric\MessageSender\MessageService31_TechnischeUnie\StructType\MessageRequest $parameters)
+    public function GetMessage(MessageRequest $parameters)
     {
         try {
             $this->setResult($resultGetMessage = $this->getSoapClient()->__soapCall('GetMessage', [
@@ -63,10 +86,10 @@ class Get extends AbstractSoapClientBase
      * @uses AbstractSoapClientBase::getSoapClient()
      * @uses AbstractSoapClientBase::setResult()
      * @uses AbstractSoapClientBase::saveLastError()
-     * @param \Wefabric\MessageSender\MessageService31_TechnischeUnie\StructType\AvailableMessagesRequest $parameters
-     * @return \Wefabric\MessageSender\MessageService31_TechnischeUnie\StructType\AvailableMessagesResponse|bool
+     * @param AvailableMessagesRequest $parameters
+     * @return AvailableMessagesResponse|bool
      */
-    public function GetAvailableMessages(\Wefabric\MessageSender\MessageService31_TechnischeUnie\StructType\AvailableMessagesRequest $parameters)
+    public function GetAvailableMessages(AvailableMessagesRequest $parameters)
     {
         try {
             $this->setResult($resultGetAvailableMessages = $this->getSoapClient()->__soapCall('GetAvailableMessages', [
@@ -82,8 +105,8 @@ class Get extends AbstractSoapClientBase
     }
     /**
      * Returns the result
-     * @see AbstractSoapClientBase::getResult()
-     * @return \Wefabric\MessageSender\MessageService31_TechnischeUnie\StructType\AvailableMessagesResponse|\Wefabric\MessageSender\MessageService31_TechnischeUnie\StructType\MessageRequestResponse
+     * @return AvailableMessagesResponse|MessageRequestResponse
+     *@see AbstractSoapClientBase::getResult()
      */
     public function getResult()
     {

@@ -64,7 +64,8 @@ if(! array_key_exists('a', $params)) {
         $get = $TechnischeUnie->getGet();
         $request = $TechnischeUnie->getAvailableMessageRequest();
         $msgRequest = $TechnischeUnie->getMessageRequestType();
-        dd('delete');
+
+        $delete = $TechnischeUnie->getDelete();
     } else {
         $post = $TechnischeUnie->getPost();
 
@@ -82,7 +83,7 @@ if(! array_key_exists('a', $params)) {
         $message = $TechnischeUnie->getNewMessage(newMsgID())
             ->setMsgContent($TechnischeUnie->formatMessage($xml)->asXML());
     }
-    dump($TechnischeUnie);
+//    dump($TechnischeUnie);
 } else if($params['a'] == 'rexel') {
     if($params['q'] == 'get') {
         $get = $RexelAlfana->getGet();
@@ -168,18 +169,25 @@ if(!$params['q'] || $params['q'] == 'post') {
     if($get->GetAvailableMessages($request)) {
         if($messageList = $get->getResult()->getMessageList()) { //also checks if $messageList !== null
             dump($get);
+
+            $i = 0;
             foreach($messageList as $msgType) {
-                echo 'Message';
+                echo '<b>Message: ' . $i .'</b>'; $i++;
                 dump($msgType);
 
                 $msgRequest->setMsgId($msgType->getMsgId())
                     ->setMsgFormat($msgType->getMsgFormat())
                     ->setMsgVersion($msgType->getMsgVersion());
+                echo 'MessageRequest';
                 dump($msgRequest);
 
                 if($message = $get->GetMessage($msgRequest)) {
+
+                    echo 'Message';
                     dump($message);
-                    //$delete->DeleteMessage($msgRequest);
+//                    dump(new SimpleXMLElement($message->getMessageRequestResult()->getMsgContent()));
+
+//                    $delete->DeleteMessage($msgRequest);
                     dd($delete);
                 }
             }

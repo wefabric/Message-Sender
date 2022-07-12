@@ -8,9 +8,13 @@ use SimpleXMLElement;
 use SoapHeader;
 use SoapVar;
 use Wefabric\MessageSender\BaseService\BaseService;
+use Wefabric\MessageSender\MessageService31_TechnischeUnie\ServiceType\Delete;
+use Wefabric\MessageSender\MessageService31_TechnischeUnie\ServiceType\Get;
+use Wefabric\MessageSender\MessageService31_TechnischeUnie\StructType\AvailableMessagesRequest;
 use Wefabric\MessageSender\MessageService31_TechnischeUnie\StructType\CustomInfo;
 use Wefabric\MessageSender\MessageService31_TechnischeUnie\StructType\Message;
 use Wefabric\MessageSender\MessageService31_TechnischeUnie\StructType\MessageProperties;
+use Wefabric\MessageSender\MessageService31_TechnischeUnie\StructType\MessageRequest;
 use Wefabric\MessageSender\MessageService31_TechnischeUnie\StructType\Security;
 use Wefabric\MessageSender\MessageService31_TechnischeUnie\StructType\UsernameToken;
 use WsdlToPhp\PackageBase\SoapClientInterface;
@@ -57,12 +61,14 @@ class TechnischeUnieSender extends MessageSender
     }
 
     /**
-     * @return object A complete Get-object to use and receive data from the set URL and credentials.
+     * @return Get A complete Get-object to use and receive data from the set URL and credentials.
      * Use: $response = $get->GetAvailableMessages($request);
      */
-    function getGet(): object
+    function getGet(): Get
     {
-        // TODO: Implement getGet() method.
+        return (new Get($this->getHttpOptions()))
+            ->setSoapHeaderSecurity($this->getSecurityAsSoapvar())
+            ->setSoapHeaderCustomInfo($this->getCustomInfo());
     }
 
     /**
@@ -75,20 +81,33 @@ class TechnischeUnieSender extends MessageSender
     }
 
     /**
-     * @return object
+     * @return AvailableMessagesRequest
      */
-    function getAvailableMessageRequest(): object
+    function getAvailableMessageRequest(): AvailableMessagesRequest
     {
-        // TODO: Implement getAvailableMessageRequest() method.
+        return new AvailableMessagesRequest(''); //empty: don't filter on type.
     }
 
     /**
-     * @return object A complete Delete-object to use and delete data at the set URL and credentials.
+     * @param string|null $msgId
+     * @param string|null $msgFormat
+     * @param string|null $msgVersion
+     * @return MessageRequest
+     */
+    function getMessageRequestType(?string $msgId = null, ?string $msgFormat = null, ?string $msgVersion = null): MessageRequest
+    {
+        return new MessageRequest($msgFormat, $msgId, $msgVersion);
+    }
+
+    /**
+     * @return Delete A complete Delete-object to use and delete data at the set URL and credentials.
      * Use: $response = $delete-> ??
      */
-    function getDelete(): object
+    function getDelete(): Delete
     {
-        // TODO: Implement getDelete() method.
+        return (new Delete($this->getHttpOptions()))
+            ->setSoapHeaderSecurity($this->getSecurityAsSoapvar())
+            ->setSoapHeaderCustomInfo($this->getCustomInfo());
     }
 
     /**
