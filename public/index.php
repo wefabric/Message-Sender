@@ -12,7 +12,8 @@ use Wefabric\StripEmptyElementsFromArray\StripEmptyElementsFromArray;
 $config = require_once('config.php');
 
 $TechnischeUnie = TechnischeUnieSender::make([
-    'url' => 'https://testservices.technischeunie.com/WebServices/ExterneBerichtUitwisselingService31/messageservice.svc?singlewsdl',
+    'url' => 'https://testservices.technischeunie.com/WebServices/ExterneBerichtUitwisselingService31/messageservice.svc?singlewsdl', // TEST WSDL
+//	'override_url' => 'https://services.technischeunie.com/WebServices/ExterneBerichtUitwisselingService31/messageservice.svc', // PRODUCTION ENDPOINT
     'relationID' => $config['TU_RELATIONID'],
     'inlogCode' => $config['TU_INLOGCODE'],
     'password' => $config['TU_PASSWORD'],
@@ -144,8 +145,9 @@ if(!$params['q'] || $params['q'] == 'post') {
 
     if ($post->PostMessage($message)) {
         $result = $post->getResult();
-        if($result->getMessage()) {
-            $response = $result->getMessage()->getMsgContent();
+        $message = $result->getMessage();
+        if(!empty($message)) { //TU only sends 'true' as result, and null as message.
+            $response = $message->getMsgContent();
             $orderResponseXML = simplexml_load_string($response);
         }
 
@@ -156,6 +158,7 @@ if(!$params['q'] || $params['q'] == 'post') {
             dump($orderResponseXML);
         } else {
             dump($result);
+            dump($message);
         }
     } else {
         dump($post);
@@ -167,8 +170,8 @@ if(!$params['q'] || $params['q'] == 'post') {
 
 } elseif ($params['q'] == 'get') {
     if($get->GetAvailableMessages($request)) {
+		dump($get);
         if($messageList = $get->getResult()->getMessageList()) { //also checks if $messageList !== null
-            dump($get);
 
             $i = 0;
             foreach($messageList as $msgType) {
