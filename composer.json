@@ -31,7 +31,8 @@
         "wsdltophp/packagegenerator": "dev-master",
         "wefabric/array-to-simplexml": "*",
         "wefabric/simplexml-to-array": "*",
-        "wefabric/strip-empty-elements-from-array": "*"
+        "wefabric/strip-empty-elements-from-array": "*",
+        "wefabric/gs1-insbou-order-converter": "dev-main"
     },
     "repositories": [
         {
@@ -45,6 +46,10 @@
         {
             "type": "vcs",
             "url": "https://github.com/wefabric/strip-empty-elements-from-array"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/wefabric/gs1-insbou-order-converter"
         }
     ]
 }

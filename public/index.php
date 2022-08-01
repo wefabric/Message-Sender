@@ -2,6 +2,7 @@
 
 require __DIR__.'/../vendor/autoload.php';
 
+use Wefabric\GS1InsbouOrderConverter\OrderResponse;
 use Wefabric\MessageSender\RexelSender;
 use Wefabric\MessageSender\SolarSender;
 use Wefabric\MessageSender\TechnischeUnieSender;
@@ -66,7 +67,7 @@ if(! array_key_exists('a', $params)) {
         $request = $TechnischeUnie->getAvailableMessageRequest();
         $msgRequest = $TechnischeUnie->getMessageRequestType();
 
-        $delete = $TechnischeUnie->getDelete();
+        //$delete = $TechnischeUnie->getDelete();
     } else {
         $post = $TechnischeUnie->getPost();
 
@@ -158,6 +159,7 @@ if(!$params['q'] || $params['q'] == 'post') {
             dump($orderResponseXML);
         } else {
             dump($result);
+			dump($result->getMessageResult());
             dump($message);
         }
     } else {
@@ -189,9 +191,14 @@ if(!$params['q'] || $params['q'] == 'post') {
                     echo 'Message';
                     dump($message);
 //                    dump(new SimpleXMLElement($message->getMessageRequestResult()->getMsgContent()));
-
-//                    $delete->DeleteMessage($msgRequest);
-                    dd($delete);
+	
+	                $orderResponse = OrderResponse::makeFromXML(new SimpleXMLElement($message->getMessageRequestResult()->getMsgContent()));
+					dump($orderResponse);
+	
+	                if(isset($delete)) {
+//                        $delete->DeleteMessage($msgRequest);
+		                dd($delete);
+	                }
                 }
             }
         }
