@@ -24,7 +24,7 @@
     ],
     "minimum-stability": "dev",
     "require-dev": {
-        "symfony/var-dumper": "6.1.x-dev"
+        "symfony/var-dumper": "6.*"
     },
     "require": {
         "spatie/data-transfer-object": "^2.8",
@@ -32,7 +32,8 @@
         "wefabric/array-to-simplexml": "*",
         "wefabric/simplexml-to-array": "*",
         "wefabric/strip-empty-elements-from-array": "*",
-        "wefabric/gs1-insbou-order-converter": "dev-main"
+        "wefabric/gs1-insbou-order-converter": "dev-main",
+        "ext-simplexml": "*"
     },
     "repositories": [
         {
