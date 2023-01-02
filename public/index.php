@@ -3,6 +3,7 @@
 require __DIR__.'/../vendor/autoload.php';
 
 use Wefabric\GS1InsbouOrderConverter\OrderResponse;
+use Wefabric\MessageSender\OosterbergSender;
 use Wefabric\MessageSender\RexelSender;
 use Wefabric\MessageSender\SolarSender;
 use Wefabric\MessageSender\TechnischeUnieSender;
@@ -34,16 +35,23 @@ $SolarAlfana = SolarSender::make([
     'password' => $config['SOLAR_PASSWORD']
 ]);
 
+$Oosterberg = OosterbergSender::make([
+	'url' => 'https://acceptatie.oosterberg.nl/messageservice31/MessageService.svc?wsdl',
+	'relationID' => $config['OOSTERBERG_RELATIONID'],
+	'inlogCode' => $config['OOSTERBERG_INLOGCODE'],
+	'password' => $config['OOSTERBERG_PASSWORD'],
+]);
+
 /**
 use WsdlToPhp\PackageGenerator\ConfigurationReader\GeneratorOptions;
 use WsdlToPhp\PackageGenerator\Generator\Generator;
 
 // Options definition: the configuration file parameter is optional
 $options = (GeneratorOptions::instance())
-    ->setOrigin($TechnischeUnie->url)
-    ->setDestination('../MessageService31_TechnischeUnie')
-    ->setComposerName('Wefabric\MessageSender\MessageService31_TechnischeUnie')
-    ->setNameSpace('Wefabric\MessageSender\MessageService31_TechnischeUnie');
+    ->setOrigin($Oosterberg->url)
+    ->setDestination('../MessageService31_Oosterberg')
+    ->setComposerName('Wefabric\MessageSender\MessageService31_Oosterberg')
+    ->setNameSpace('Wefabric\MessageSender\MessageService31_Oosterberg');
 $generator = new Generator($options);
 $generator->generatePackage();
 die();
@@ -136,8 +144,33 @@ if(! array_key_exists('a', $params)) {
             ->setMsgContent($SolarAlfana->formatMessage($xml)->asXML());
     }
     //dump($SolarAlfana);
+} else if($params['a'] == 'oosterberg') {
+	if($params['q'] == 'get') {
+		$get = $Oosterberg->getGet();
+		$request = $Oosterberg->getAvailableMessageRequest();
+		$msgRequest = $Oosterberg->getMessageRequestType();
+		
+		$delete = $Oosterberg->getDelete();
+	} else {
+		$post = $Oosterberg->getPost();
+		
+		$xml = simplexml_load_file( './order-min-test.xml')->asXML();
+		//Convert to string, so we can do replacements. Not too pretty, but in the actual application the values are preinserted and do not need replacing.
+		$xml = str_replace('%%BUYER_GLN%%', '8714231774051', $xml);
+		$xml = str_replace('%%DELIVERYPARTY_GLN%%', '8714231774051', $xml);
+		$xml = str_replace('%%SUPPLIER_GLN%%', '8711891990012', $xml);
+		$xml = str_replace('%%ITEM_ID%%', '2301056', $xml);
+		$xml = str_replace('%%DELIVERYPARTY_LOCATIONDESCRIPTION%%', '001', $xml);
+		
+		$xml = StripEmptyElementsFromArray::from(SimplexmlToArray::convert(new SimpleXMLElement($xml)));
+		//And now we parse everything back to a sendable array.
+		
+		$message = $Oosterberg->getNewMessage(newMsgID())
+			->setMsgContent($Oosterberg->formatMessage($xml)->asXML());
+	}
+	//dump($Oosterberg);
 } else {
-    dd('Geen geldige parameter \'?a=\' gevonden. Verwacht: tu,rexel,solar. Gekregen: \'' . $params['a'] . '\'');
+    dd('Geen geldige parameter \'?a=\' gevonden. Verwacht: tu,rexel,solar,oosterberg. Gekregen: \'' . $params['a'] . '\'');
 }
 
 if(!$params['q'] || $params['q'] == 'post') {

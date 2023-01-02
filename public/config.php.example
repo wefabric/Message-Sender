@@ -11,4 +11,8 @@ return [
 
     'SOLAR_INLOGCODE' => '',
     'SOLAR_PASSWORD' => '',
+
+    'OOSTERBERG_RELATIONID' => '',
+    'OOSTERBERG_INLOGCODE' => '',
+    'OOSTERBERG_PASSWORD' => '',
 ];
