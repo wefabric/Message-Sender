@@ -22,14 +22,16 @@ $TechnischeUnie = TechnischeUnieSender::make([
 ]);
 
 $RexelAlfana = RexelSender::make([
-    'url' => 'https://test.messageservice.rexel.nl/MessageService31/MessageService.svc?wsdl',
+//    'url' => 'https://test.messageservice.rexel.nl/MessageService31/MessageService.svc?wsdl',
+  'url' => 'https://messageservice.rexel.nl/MessageService31/MessageService.svc?wsdl', //PROD
     'relationID' => $config['REXEL_RELATIONID'], // = klantnummer
     'inlogCode' => $config['REXEL_INLOGCODE'],
     'password' => $config['REXEL_PASSWORD']
 ]);
 
 $SolarAlfana = SolarSender::make([
-    'url' => 'https://api.solarnederland.online/dico/tst2/31?wsdl',
+	'url' => 'https://api.solarnederland.online/dico/tst2/31?wsdl',
+//	'url' => 'https://ext.solarnederland.online/biztolk/api/dico/31?wsdl', //PROD
     'relationID' => '', // is empty
     'inlogCode' => $config['SOLAR_INLOGCODE'],
     'password' => $config['SOLAR_PASSWORD']
