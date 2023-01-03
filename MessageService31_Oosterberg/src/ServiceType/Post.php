@@ -78,6 +78,11 @@ class Post extends BaseService
      */
     public function getResult()
     {
-        return parent::getResult();
+		$result = parent::getResult();
+		$message = null;
+		if($result->MessageResult) {
+			$message = new Message($result->Message->MsgProperties, $result->Message->MsgContent);
+		}
+		return new MessageResponse(true, $message);
     }
 }

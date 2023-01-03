@@ -7,7 +7,9 @@ namespace Wefabric\MessageSender\MessageService31_Oosterberg\ServiceType;
 use SoapFault;
 use Wefabric\MessageSender\BaseService\BaseService;
 use Wefabric\MessageSender\MessageService31_Oosterberg\StructType\CustomInfo;
+use Wefabric\MessageSender\MessageService31_Oosterberg\StructType\Message;
 use Wefabric\MessageSender\MessageService31_Oosterberg\StructType\MessageRequest;
+use Wefabric\MessageSender\MessageService31_Oosterberg\StructType\MessageRequestResponse;
 use Wefabric\MessageSender\MessageService31_Oosterberg\StructType\MessageResponse;
 use Wefabric\MessageSender\MessageService31_Oosterberg\StructType\Security;
 use WsdlToPhp\PackageBase\AbstractSoapClientBase;
@@ -78,6 +80,11 @@ class Delete extends BaseService
      */
     public function getResult()
     {
-        return parent::getResult();
-    }
+	    $result = parent::getResult();
+	    $message = null;
+	    if($result->MessageResult) {
+		    $message = new Message($result->Message->MsgProperties, $result->Message->MsgContent);
+	    }
+	    return new MessageResponse(true, $message);
+	}
 }

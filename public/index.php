@@ -83,9 +83,9 @@ if(! array_key_exists('a', $params)) {
 
         $xml = simplexml_load_file( './order-test.xml')->asXML();
         //Convert to string, so we can do replacements. Not too pretty, but in the actual application the values are preinserted and do not need replacing.
-        $xml = str_replace('%%BUYER_GLN%%', '8714231774051', $xml);
+        $xml = str_replace('%%BUYER_GLN%%', $config['BUYER_GLN'], $xml);
         $xml = str_replace('<GLN>%%DELIVERYPARTY_GLN%%</GLN>', '', $xml); //strip out this line
-        $xml = str_replace('%%SUPPLIER_GLN%%', '8711389000001', $xml);
+        $xml = str_replace('%%SUPPLIER_GLN%%', $config['TU_GLN'], $xml);
         $xml = str_replace('%%ITEM_ID%%', '0521617', $xml);
         $xml = str_replace('%%DELIVERYPARTY_LOCATIONDESCRIPTION%%', '', $xml);
 
@@ -107,10 +107,10 @@ if(! array_key_exists('a', $params)) {
         $post = $RexelAlfana->getPost();
 
         $xml = simplexml_load_file( './order-min-test.xml')->asXML();
-        //Convert to string, so we can do replacements. Not too pretty, but in the actual application the values are preinserted and do not need replacing.
-        $xml = str_replace('%%BUYER_GLN%%', '8714231774051', $xml);
-        $xml = str_replace('%%DELIVERYPARTY_GLN%%', '8714231774051', $xml);
-        $xml = str_replace('%%SUPPLIER_GLN%%', '8713473009990', $xml);
+		//Convert to string, so we can do replacements. Not too pretty, but in the actual application the values are preinserted and do not need replacing.
+        $xml = str_replace('%%BUYER_GLN%%', $config['BUYER_GLN'], $xml);
+        $xml = str_replace('%%DELIVERYPARTY_GLN%%', $config['BUYER_GLN'], $xml);
+        $xml = str_replace('%%SUPPLIER_GLN%%', $config['REXEL_GLN'], $xml);
         $xml = str_replace('%%ITEM_ID%%', '2700320341', $xml);
         $xml = str_replace('%%DELIVERYPARTY_LOCATIONDESCRIPTION%%', '', $xml);
 
@@ -133,9 +133,9 @@ if(! array_key_exists('a', $params)) {
 
         $xml = simplexml_load_file( './order-min-test.xml')->asXML();
         //Convert to string, so we can do replacements. Not too pretty, but in the actual application the values are preinserted and do not need replacing.
-        $xml = str_replace('%%BUYER_GLN%%', '8714231774051', $xml);
-        $xml = str_replace('%%DELIVERYPARTY_GLN%%', '8714231774051', $xml);
-        $xml = str_replace('%%SUPPLIER_GLN%%', '8711891990012', $xml);
+        $xml = str_replace('%%BUYER_GLN%%', $config['BUYER_GLN'], $xml);
+        $xml = str_replace('%%DELIVERYPARTY_GLN%%', $config['BUYER_GLN'], $xml);
+        $xml = str_replace('%%SUPPLIER_GLN%%', $config['SOLAR_GLN'], $xml);
         $xml = str_replace('%%ITEM_ID%%', '2301056', $xml);
         $xml = str_replace('%%DELIVERYPARTY_LOCATIONDESCRIPTION%%', '001', $xml);
 
@@ -158,11 +158,11 @@ if(! array_key_exists('a', $params)) {
 		
 		$xml = simplexml_load_file( './order-min-test.xml')->asXML();
 		//Convert to string, so we can do replacements. Not too pretty, but in the actual application the values are preinserted and do not need replacing.
-		$xml = str_replace('%%BUYER_GLN%%', '8714231774051', $xml);
-		$xml = str_replace('%%DELIVERYPARTY_GLN%%', '8714231774051', $xml);
-		$xml = str_replace('%%SUPPLIER_GLN%%', '8711891990012', $xml);
-		$xml = str_replace('%%ITEM_ID%%', '2301056', $xml);
-		$xml = str_replace('%%DELIVERYPARTY_LOCATIONDESCRIPTION%%', '001', $xml);
+		$xml = str_replace('%%BUYER_GLN%%', $config['BUYER_GLN'], $xml);
+		$xml = str_replace('%%DELIVERYPARTY_GLN%%', $config['BUYER_GLN'], $xml);
+		$xml = str_replace('%%SUPPLIER_GLN%%', $config['OOSTERBERG_GLN'], $xml);
+		$xml = str_replace('%%ITEM_ID%%', '10018148', $xml);
+		$xml = str_replace('%%DELIVERYPARTY_LOCATIONDESCRIPTION%%', '', $xml);
 		
 		$xml = StripEmptyElementsFromArray::from(SimplexmlToArray::convert(new SimpleXMLElement($xml)));
 		//And now we parse everything back to a sendable array.
@@ -236,6 +236,8 @@ if(!$params['q'] || $params['q'] == 'post') {
 	                }
                 }
             }
+        } else {
+			dump('No messages available.');
         }
     } else {
         dump($get);

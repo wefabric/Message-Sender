@@ -1,18 +1,24 @@
 <?php
 
 return [
+    'BUYER_GLN' => '',
+
     'TU_RELATIONID' => '',
     'TU_INLOGCODE' => '',
     'TU_PASSWORD' => '',
+    'TU_GLN' => '',
 
     'REXEL_RELATIONID' => '',
     'REXEL_INLOGCODE' => '',
     'REXEL_PASSWORD' => '',
+    'REXEL_GLN' => '',
 
     'SOLAR_INLOGCODE' => '',
     'SOLAR_PASSWORD' => '',
+    'SOLAR_GLN' => '',
 
     'OOSTERBERG_RELATIONID' => '',
     'OOSTERBERG_INLOGCODE' => '',
     'OOSTERBERG_PASSWORD' => '',
+    'OOSTERBERG_GLN' => '',
 ];

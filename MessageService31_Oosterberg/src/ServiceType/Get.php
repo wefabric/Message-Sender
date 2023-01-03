@@ -9,8 +9,11 @@ use Wefabric\MessageSender\BaseService\BaseService;
 use Wefabric\MessageSender\MessageService31_Oosterberg\StructType\AvailableMessagesRequest;
 use Wefabric\MessageSender\MessageService31_Oosterberg\StructType\AvailableMessagesResponse;
 use Wefabric\MessageSender\MessageService31_Oosterberg\StructType\CustomInfo;
+use Wefabric\MessageSender\MessageService31_Oosterberg\StructType\Message;
+use Wefabric\MessageSender\MessageService31_Oosterberg\StructType\MessageList;
 use Wefabric\MessageSender\MessageService31_Oosterberg\StructType\MessageRequest;
 use Wefabric\MessageSender\MessageService31_Oosterberg\StructType\MessageRequestResponse;
+use Wefabric\MessageSender\MessageService31_Oosterberg\StructType\MessageResponse;
 use Wefabric\MessageSender\MessageService31_Oosterberg\StructType\Security;
 use WsdlToPhp\PackageBase\AbstractSoapClientBase;
 
@@ -65,8 +68,11 @@ class Get extends BaseService
             $this->setResult($resultGetMessage = $this->getSoapClient()->__soapCall('GetMessage', [
                 $parameters,
             ], [], [], $this->outputHeaders));
-        
-            return $resultGetMessage;
+	
+	        if($resultGetMessage->MessageRequestResult) {
+		        return new MessageRequestResponse(new Message($resultGetMessage->MessageRequestResult->MsgProperties, $resultGetMessage->MessageRequestResult->MsgContent));
+	        }
+	        return null;
         } catch (SoapFault $soapFault) {
             $this->saveLastError(__METHOD__, $soapFault);
         
@@ -102,11 +108,21 @@ class Get extends BaseService
     }
     /**
      * Returns the result
-     * @return AvailableMessagesResponse|MessageRequestResponse
+     * @return AvailableMessagesResponse
      *@see AbstractSoapClientBase::getResult()
      */
     public function getResult()
     {
-        return parent::getResult();
+	    $result = parent::getResult();
+		if(json_decode(json_encode($result),true) === []) {
+			$messageList = []; //This is when a MessageList is requested but there are no messages, and an empty object is returned.
+		} elseif($result->MessageList) {
+			$messageList = $result->MessageList;
+	    }
+
+		if(isset($messageList)) {
+		    return new AvailableMessagesResponse($messageList);
+		}
+		return null;
     }
 }
