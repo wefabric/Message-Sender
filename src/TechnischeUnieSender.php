@@ -82,9 +82,9 @@ class TechnischeUnieSender extends MessageSender
     /**
      * @return AvailableMessagesRequest
      */
-    function getAvailableMessageRequest(): AvailableMessagesRequest
+    function getAvailableMessageRequest(string $type = ''): AvailableMessagesRequest
     {
-        return new AvailableMessagesRequest(''); //empty: don't filter on type.
+        return new AvailableMessagesRequest($type);
     }
 
     /**

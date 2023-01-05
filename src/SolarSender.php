@@ -88,9 +88,9 @@ class SolarSender extends MessageSender
     /**
      * @return AvailableMessagesRequestType
      */
-    function getAvailableMessageRequest(): AvailableMessagesRequestType
+    function getAvailableMessageRequest(string $type = ''): AvailableMessagesRequestType
     {
-        return new AvailableMessagesRequestType(''); //empty: don't filter on type.
+        return new AvailableMessagesRequestType($type);
     }
 
     /**

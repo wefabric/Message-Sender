@@ -78,11 +78,12 @@ abstract class MessageSender extends DataTransferObject
      * @return object
      */
     abstract function getNewMessage(string $msgID): object;
-
-    /**
-     * @return object
-     */
-    abstract function getAvailableMessageRequest(): object;
+	
+	/**
+	 * @param string $type ORDRSP, INVOIC, DESADV for specific objects. Leave empty ('') for everything.
+	 * @return object
+	 */
+    abstract function getAvailableMessageRequest(string $type = ''): object;
 
     abstract function getMessageRequestType(?string $msgId = null, ?string $msgFormat = null, ?string $msgVersion = null): object;
 

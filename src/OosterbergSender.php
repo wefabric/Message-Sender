@@ -101,9 +101,9 @@ class OosterbergSender extends MessageSender
 	/**
 	 * @inheritDoc
 	 */
-	function getAvailableMessageRequest(): AvailableMessagesRequest
+	function getAvailableMessageRequest(string $type = ''): AvailableMessagesRequest
 	{
-		return new AvailableMessagesRequest(''); //empty: don't filter on type.
+		return new AvailableMessagesRequest($type);
 	}
 	
 	function getMessageRequestType(?string $msgId = null, ?string $msgFormat = null, ?string $msgVersion = null): MessageRequest

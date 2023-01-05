@@ -74,7 +74,7 @@ if(! array_key_exists('a', $params)) {
 } else if($params['a'] == 'tu') {
     if($params['q'] == 'get') {
         $get = $TechnischeUnie->getGet();
-        $request = $TechnischeUnie->getAvailableMessageRequest();
+        $request = $TechnischeUnie->getAvailableMessageRequest($params['t'] ?? '');
         $msgRequest = $TechnischeUnie->getMessageRequestType();
 
         //$delete = $TechnischeUnie->getDelete();
@@ -99,7 +99,7 @@ if(! array_key_exists('a', $params)) {
 } else if($params['a'] == 'rexel') {
     if($params['q'] == 'get') {
         $get = $RexelAlfana->getGet();
-        $request = $RexelAlfana->getAvailableMessageRequest();
+        $request = $RexelAlfana->getAvailableMessageRequest($params['t'] ?? '');
         $msgRequest = $RexelAlfana->getMessageRequestType();
 
         $delete = $RexelAlfana->getDelete();
@@ -124,7 +124,7 @@ if(! array_key_exists('a', $params)) {
 } else if($params['a'] == 'solar') {
     if($params['q'] == 'get') {
         $get = $SolarAlfana->getGet();
-        $request = $SolarAlfana->getAvailableMessageRequest();
+        $request = $SolarAlfana->getAvailableMessageRequest($params['t'] ?? '');
         $msgRequest = $SolarAlfana->getMessageRequestType();
 
         $delete = $SolarAlfana->getDelete();
@@ -149,7 +149,7 @@ if(! array_key_exists('a', $params)) {
 } else if($params['a'] == 'oosterberg') {
 	if($params['q'] == 'get') {
 		$get = $Oosterberg->getGet();
-		$request = $Oosterberg->getAvailableMessageRequest();
+		$request = $Oosterberg->getAvailableMessageRequest($params['t'] ?? '');
 		$msgRequest = $Oosterberg->getMessageRequestType();
 		
 		$delete = $Oosterberg->getDelete();

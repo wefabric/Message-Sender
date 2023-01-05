@@ -99,9 +99,9 @@ class RexelSender extends MessageSender
         return new MessageType(msgProperties: new MessageList($msgID, (new DateTime())->format(DateTimeInterface::RFC3339), $this->msgFormat, $this->msgVersion, $this->msgType));
     }
 
-    public function getAvailableMessageRequest(): AvailableMessagesRequestType
+    public function getAvailableMessageRequest(string $type = ''): AvailableMessagesRequestType
     {
-        return new AvailableMessagesRequestType(''); //empty: don't filter on type.
+        return new AvailableMessagesRequestType($type);
     }
 
     function getMessageRequestType(?string $msgId = null, ?string $msgFormat = null, ?string $msgVersion = null): MessageRequestType
