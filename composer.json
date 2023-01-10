@@ -34,7 +34,8 @@
         "wefabric/simplexml-to-array": "*",
         "wefabric/strip-empty-elements-from-array": "*",
         "wefabric/gs1-insbou-order-converter": "dev-main",
-        "ext-simplexml": "*"
+        "ext-simplexml": "*",
+        "ext-soap": "*"
     },
     "repositories": [
         {

@@ -22,8 +22,8 @@ $TechnischeUnie = TechnischeUnieSender::make([
 ]);
 
 $RexelAlfana = RexelSender::make([
-//    'url' => 'https://test.messageservice.rexel.nl/MessageService31/MessageService.svc?wsdl',
-  'url' => 'https://messageservice.rexel.nl/MessageService31/MessageService.svc?wsdl', //PROD
+    'url' => 'https://test.messageservice.rexel.nl/MessageService31/MessageService.svc?wsdl',
+//  'url' => 'https://messageservice.rexel.nl/MessageService31/MessageService.svc?wsdl', //PROD
     'relationID' => $config['REXEL_RELATIONID'], // = klantnummer
     'inlogCode' => $config['REXEL_INLOGCODE'],
     'password' => $config['REXEL_PASSWORD']

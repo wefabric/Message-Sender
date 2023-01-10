@@ -64,7 +64,6 @@ class OosterbergSender extends MessageSender
 	function getHttpOptions(): array
 	{
 		return array_merge(parent::getHttpOptions(), [
-			SoapClientInterface::WSDL_URL => $this->url,
 			SoapClientInterface::WSDL_CLASSMAP => MessageService31_Oosterberg\ClassMap::get()
 		]);
 	}

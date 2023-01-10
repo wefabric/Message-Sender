@@ -10,6 +10,7 @@ use WsdlToPhp\PackageBase\SoapClientInterface;
 abstract class MessageSender extends DataTransferObject
 {
     public string $url = '';
+    public ?string $override_url = null; // specifically for TU: needs to send the message somewhere else than is specified on the WSDL itself. Also used for caching the WSDL locally.
     public string $relationID = '';
     public string $inlogCode = '';
     public string $password = '';
@@ -69,7 +70,10 @@ abstract class MessageSender extends DataTransferObject
         return [
             SoapClientInterface::WSDL_SOAP_VERSION => SOAP_1_1, //OK
             SoapClientInterface::WSDL_CONNECTION_TIMEOUT => 60,
-            SoapClientInterface::WSDL_CACHE_WSDL => WSDL_CACHE_NONE
+            SoapClientInterface::WSDL_CACHE_WSDL => WSDL_CACHE_NONE,
+            
+            SoapClientInterface::WSDL_URL => $this->url, //set mode: WSDL
+            SoapClientInterface::WSDL_LOCATION => (!empty($this->override_url) ? $this->override_url : $this->url), //set overriding location
         ];
     }
 

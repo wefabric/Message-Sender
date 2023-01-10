@@ -23,9 +23,7 @@ use Wefabric\MessageSender\MessageService31_TechnischeUnie\ServiceType\Post;
 
 class TechnischeUnieSender extends MessageSender
 {
-
-	public ?string $override_url = null; // specifically for TU: needs to send the message somewhere else than is specified on the WSDL itself.
-
+	
     protected string $versionID = '3.10';
 
     /**
@@ -42,9 +40,7 @@ class TechnischeUnieSender extends MessageSender
     function getHttpOptions(): array
     {
         return array_merge(parent::getHttpOptions(), [
-            SoapClientInterface::WSDL_URL => $this->url, //set mode: WSDL
             SoapClientInterface::WSDL_CLASSMAP => MessageService31_TechnischeUnie\ClassMap::get(),
-            SoapClientInterface::WSDL_LOCATION => (!empty($this->override_url) ? $this->override_url : $this->url), //set overriding location
         ]);
     }
 
