@@ -25,5 +25,4 @@ Homestead.json
 #Custom
 .DS_Store
 .idea
-composer.lock
 public/config.php
