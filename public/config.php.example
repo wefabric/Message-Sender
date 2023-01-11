@@ -7,18 +7,24 @@ return [
     'TU_INLOGCODE' => '',
     'TU_PASSWORD' => '',
     'TU_GLN' => '',
+    'TU_URL' => '',
+    'TU_OVERRIDE_URL' => '', // for production
 
     'REXEL_RELATIONID' => '',
     'REXEL_INLOGCODE' => '',
     'REXEL_PASSWORD' => '',
     'REXEL_GLN' => '',
+    'REXEL_URL' => '',
 
     'SOLAR_INLOGCODE' => '',
     'SOLAR_PASSWORD' => '',
     'SOLAR_GLN' => '',
+    'SOLAR_URL' => '',
 
     'OOSTERBERG_RELATIONID' => '',
     'OOSTERBERG_INLOGCODE' => '',
     'OOSTERBERG_PASSWORD' => '',
     'OOSTERBERG_GLN' => '',
+    'OOSTERBERG_URL' => '',
+
 ];

@@ -14,31 +14,29 @@ use Wefabric\StripEmptyElementsFromArray\StripEmptyElementsFromArray;
 $config = require_once('config.php');
 
 $TechnischeUnie = TechnischeUnieSender::make([
-    'url' => 'https://testservices.technischeunie.com/WebServices/ExterneBerichtUitwisselingService31/messageservice.svc?singlewsdl', // TEST WSDL
-//	'override_url' => 'https://services.technischeunie.com/WebServices/ExterneBerichtUitwisselingService31/messageservice.svc', // PRODUCTION ENDPOINT
+    'url' => $config['TU_URL'],
+	'override_url' => $config['TU_OVERRIDE_URL'] ?? '',
     'relationID' => $config['TU_RELATIONID'],
     'inlogCode' => $config['TU_INLOGCODE'],
     'password' => $config['TU_PASSWORD'],
 ]);
 
 $RexelAlfana = RexelSender::make([
-    'url' => 'https://test.messageservice.rexel.nl/MessageService31/MessageService.svc?wsdl',
-//  'url' => 'https://messageservice.rexel.nl/MessageService31/MessageService.svc?wsdl', //PROD
+    'url' => $config['REXEL_URL'],
     'relationID' => $config['REXEL_RELATIONID'], // = klantnummer
     'inlogCode' => $config['REXEL_INLOGCODE'],
     'password' => $config['REXEL_PASSWORD']
 ]);
 
 $SolarAlfana = SolarSender::make([
-	'url' => 'https://api.solarnederland.online/dico/tst2/31?wsdl',
-//	'url' => 'https://ext.solarnederland.online/biztolk/api/dico/31?wsdl', //PROD
+	'url' => $config['SOLAR_URL'],
     'relationID' => '', // is empty
     'inlogCode' => $config['SOLAR_INLOGCODE'],
     'password' => $config['SOLAR_PASSWORD']
 ]);
 
 $Oosterberg = OosterbergSender::make([
-	'url' => 'https://acceptatie.oosterberg.nl/messageservice31/MessageService.svc?wsdl',
+	'url' => $config['OOSTERBERG_URL'],
 	'relationID' => $config['OOSTERBERG_RELATIONID'],
 	'inlogCode' => $config['OOSTERBERG_INLOGCODE'],
 	'password' => $config['OOSTERBERG_PASSWORD'],
