@@ -67,15 +67,18 @@ abstract class MessageSender extends DataTransferObject
      */
     function getHttpOptions(): array
     {
-        return [
+		return array_merge([
             SoapClientInterface::WSDL_SOAP_VERSION => SOAP_1_1, //OK
             SoapClientInterface::WSDL_CONNECTION_TIMEOUT => 60,
             SoapClientInterface::WSDL_CACHE_WSDL => WSDL_CACHE_NONE,
-            
-            SoapClientInterface::WSDL_URL => $this->url, //set mode: WSDL
-            SoapClientInterface::WSDL_LOCATION => (!empty($this->override_url) ? $this->override_url : $this->url), //set overriding location
-        ];
-    }
+			SoapClientInterface::WSDL_URL => $this->url, //set mode: WSDL
+		],
+		(
+			!empty($this->override_url) ? [
+                SoapClientInterface::WSDL_LOCATION => $this->override_url, //set overriding location, if provided, otherwise leave this option empty.
+			] : [] ),
+		);
+	}
 
     /**
      * @param string $msgID
