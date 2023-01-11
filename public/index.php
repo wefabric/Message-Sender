@@ -2,6 +2,7 @@
 
 require __DIR__.'/../vendor/autoload.php';
 
+use Wefabric\GS1InsbouOrderConverter\Invoice;
 use Wefabric\GS1InsbouOrderConverter\OrderResponse;
 use Wefabric\MessageSender\OosterbergSender;
 use Wefabric\MessageSender\RexelSender;
@@ -225,8 +226,22 @@ if(!$params['q'] || $params['q'] == 'post') {
                     dump($message);
 //                    dump(new SimpleXMLElement($message->getMessageRequestResult()->getMsgContent()));
 	
-	                $orderResponse = OrderResponse::makeFromXML(new SimpleXMLElement($message->getMessageRequestResult()->getMsgContent()));
-					dump($orderResponse);
+	                $msgContent = $message->getMessageRequestResult()->getMsgContent();
+	                $responseXml = new SimpleXMLElement($msgContent);
+					
+	                switch($msgType->getMsgType()) {
+		                case 'ORDRSP':
+			                $orderResponse = OrderResponse::makeFromXML($responseXml);
+							dump($orderResponse);
+							break;
+		                case 'INVOIC':
+							$invoice = Invoice::makeFromXML($responseXml);
+							dump($invoice);
+							break;
+		                default:
+							dd('MsgFormat '. $msgType->getMsgType() .' not yet supported.');
+	                }
+	                
 	
 	                if(isset($delete)) {
 //                        $delete->DeleteMessage($msgRequest);
