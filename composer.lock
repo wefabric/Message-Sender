@@ -2618,12 +2618,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/wefabric/GS1-insbou-order-converter.git",
-                "reference": "cfdc91f0993aeb31355094c5eea899ad85ff7843"
+                "reference": "3e2cf191676a93792820dbc4222c20ad4a46c1cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wefabric/GS1-insbou-order-converter/zipball/cfdc91f0993aeb31355094c5eea899ad85ff7843",
-                "reference": "cfdc91f0993aeb31355094c5eea899ad85ff7843",
+                "url": "https://api.github.com/repos/wefabric/GS1-insbou-order-converter/zipball/3e2cf191676a93792820dbc4222c20ad4a46c1cf",
+                "reference": "3e2cf191676a93792820dbc4222c20ad4a46c1cf",
                 "shasum": ""
             },
             "require": {
@@ -2666,7 +2666,7 @@
                 "source": "https://github.com/wefabric/GS1-insbou-order-converter/tree/main",
                 "issues": "https://github.com/wefabric/GS1-insbou-order-converter/issues"
             },
-            "time": "2023-01-12T13:40:24+00:00"
+            "time": "2023-01-19T13:00:04+00:00"
         },
         {
             "name": "wefabric/simplexml-to-array",

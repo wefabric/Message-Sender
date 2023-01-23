@@ -71,6 +71,8 @@ $messageType = null;
 if(! array_key_exists('a', $params)) {
     dd('Geen geldige parameter \'?a=\' gevonden. Verwacht: tu,rexel,solar. ');
 } else if($params['a'] == 'tu') {
+	dump($config['TU_URL']);
+	dump($config['TU_OVERRIDE_URL']);
     if($params['q'] == 'get') {
         $get = $TechnischeUnie->getGet();
         $request = $TechnischeUnie->getAvailableMessageRequest($params['t'] ?? '');
@@ -96,7 +98,8 @@ if(! array_key_exists('a', $params)) {
     }
 //    dump($TechnischeUnie);
 } else if($params['a'] == 'rexel') {
-    if($params['q'] == 'get') {
+	dump($config['REXEL_URL']);
+	if($params['q'] == 'get') {
         $get = $RexelAlfana->getGet();
         $request = $RexelAlfana->getAvailableMessageRequest($params['t'] ?? '');
         $msgRequest = $RexelAlfana->getMessageRequestType();
@@ -121,6 +124,7 @@ if(! array_key_exists('a', $params)) {
     }
     //dump($RexelAlfana);
 } else if($params['a'] == 'solar') {
+	dump($config['SOLAR_URL']);
     if($params['q'] == 'get') {
         $get = $SolarAlfana->getGet();
         $request = $SolarAlfana->getAvailableMessageRequest($params['t'] ?? '');
@@ -146,6 +150,7 @@ if(! array_key_exists('a', $params)) {
     }
     //dump($SolarAlfana);
 } else if($params['a'] == 'oosterberg') {
+	dump($config['OOSTERBERG_URL']);
 	if($params['q'] == 'get') {
 		$get = $Oosterberg->getGet();
 		$request = $Oosterberg->getAvailableMessageRequest($params['t'] ?? '');
@@ -243,9 +248,11 @@ if(!$params['q'] || $params['q'] == 'post') {
 	                }
 	                
 	
-	                if(isset($delete)) {
+	                if(isset($delete) && !empty($params['delete'])) {
 //                        $delete->DeleteMessage($msgRequest);
 		                dd($delete);
+	                } else {
+						dd('stop');
 	                }
                 }
             }
