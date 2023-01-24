@@ -2,6 +2,7 @@
 
 require __DIR__.'/../vendor/autoload.php';
 
+use Wefabric\GS1InsbouOrderConverter\DespatchAdvice;
 use Wefabric\GS1InsbouOrderConverter\Invoice;
 use Wefabric\GS1InsbouOrderConverter\OrderResponse;
 use Wefabric\MessageSender\OosterbergSender;
@@ -243,6 +244,10 @@ if(!$params['q'] || $params['q'] == 'post') {
 							$invoice = Invoice::makeFromXML($responseXml);
 							dump($invoice);
 							break;
+		                case 'DESADV':
+			                $desadv = DespatchAdvice::makeFromXML($responseXml);
+			                dump($desadv);
+			                break;
 		                default:
 							dd('MsgFormat '. $msgType->getMsgType() .' not yet supported.');
 	                }
